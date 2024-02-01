@@ -31,12 +31,13 @@ export default function RegisterationScreen() {
     setState(event.target.value);
   };
 
-  const toast=useToast();
+  const toast = useToast();
   async function registeration() {
     console.log(role, firstName, lastName, email, password)
     if (role && firstName && lastName && email && password) {
       const response = await axios.post('/api/register', { role, firstName, lastName, email, password })
-      if (response.status) {
+      console.log(response.data.status);
+      if (response.data.status) {
         toast({
           title: "User Registered",
           status: "success",
@@ -44,9 +45,10 @@ export default function RegisterationScreen() {
           duration: 5000,
           isClosable: true
         })
-      }else{
+      } else{
         toast({
           title: "Authenthication Error",
+          description: response.data.message,
           status: "error",
           position: "top",
           duration: 5000,
