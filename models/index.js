@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { Teacher } from "./Teacher.js";
 // import { Course } from "./Course.js";
 
 (async () => {
   await mongoose.connect(`mongodb+srv://faseeh:Aeiou.123@testing-system.pnoppvs.mongodb.net/`);
 })();
 
-// export const db = { Course };
+export const db = {Teacher};

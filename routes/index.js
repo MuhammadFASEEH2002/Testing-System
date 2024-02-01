@@ -1,12 +1,9 @@
 import express from "express";
 const router = express.Router();
-// import { db } from "../models/index.js";
-//import ctrlCourse from "../controllers/courseController.js";
 
-router.get("/msg", (req, res) => {
-  res.json({ msg: "Hello World" });
-});
+import * as authController from '../controllers/authController.js'
 
 
+router.post('/register', authController.register)
 
 export default router;

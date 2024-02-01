@@ -12,13 +12,21 @@
     "start": "concurrently npm:start:*"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "axios": "^1.6.7",
     "concurrently": "^8.2.2",
     "express": "^4.18.2",
+    "framer-motion": "^11.0.3",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
     "nodemon": "^3.0.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router": "^6.21.3",
+    "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
