@@ -11,9 +11,8 @@ import {
     Text,
     useColorModeValue,
     Radio, RadioGroup,
-useToast
+    useToast
 } from '@chakra-ui/react'
-import axios from 'axios';
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import api from '../utils/api';
@@ -22,44 +21,49 @@ export default function LoginScreen() {
     const [role, setRole] = useState<string>("teacher");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-const toast=useToast()
-const navigate=useNavigate()
+    const toast = useToast()
+    const navigate = useNavigate()
     const handleInputChange = (event: any, setState: any) => {
         setState(event.target.value);
     };
     async function login() {
         console.log(role, email, password)
-        if (role  && email && password) {
-          const response = await api.post('/api/login', { role, email, password })
-          console.log(response.data);
-          if (response.data.status) {
-            toast({
-              title: "User Logged In",
-              status: "success",
-              position: "top",
-              duration: 5000,
-              isClosable: true
-            })
-          } else{
-            toast({
-              title: "Authenthication Error",
-              description: response.data.message,
-              status: "error",
-              position: "top",
-              duration: 5000,
-              isClosable: true
-            })
-          }
+        if (role && email && password) {
+            const response = await api.post('/api/login', { role, email, password })
+            console.log(response.data);
+            if (response.data.status) {
+                toast({
+                    title: "User Logged In",
+                    status: "success",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true
+                })
+                if (response.data.role == "teacher") {
+                    navigate('/login/teacher/home')
+                } else {
+
+                }
+            } else {
+                toast({
+                    title: "Authenthication Error",
+                    description: response.data.message,
+                    status: "error",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true
+                })
+            }
         } else {
-          toast({
-            title: "Empty Fields",
-            status: "error",
-            position: "top",
-            duration: 5000,
-            isClosable: true
-          })
+            toast({
+                title: "Empty Fields",
+                status: "error",
+                position: "top",
+                duration: 5000,
+                isClosable: true
+            })
         }
-      }
+    }
     return (
         <Flex
             minH={'100vh'}
@@ -116,7 +120,7 @@ const navigate=useNavigate()
                                 _hover={{
                                     bg: 'blue.500',
                                 }}
-                                onClick={()=>login()}>
+                                onClick={() => login()}>
                                 Sign in
                             </Button>
                             <Text align={'center'}>

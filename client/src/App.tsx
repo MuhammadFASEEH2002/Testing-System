@@ -6,18 +6,6 @@ import LoginScreen from "./screens/LoginScreen";
 import TeacherHome from "./screens/teacher/TeacherHome";
 
 function App() {
-  // const [cookies] = useCookies();
-  // if (!cookies?.token) {
-  //   return (
-  //     <>
-  //       <Router>
-  //         <Routes>
-  //           <Route path="/" element={<Login />} />
-  //         </Routes>
-  //       </Router>
-  //     </>
-  //   );
-  // } else {
     return (
       <>
         <Router>

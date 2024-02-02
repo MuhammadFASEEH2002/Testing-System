@@ -106,7 +106,7 @@ exports.login = async (req, res) => {
                         httpOnly: false,
                         maxAge: 2592000000
                     });
-                    res.json({ message: "User logged in successfully", status: true, User });
+                    res.json({ message: "User logged in successfully", status: true, role: req.body.role  });
                 } else {
                     res.json({ message: "Incorrect Password", status: false});
                 }
@@ -125,7 +125,7 @@ exports.login = async (req, res) => {
                         httpOnly: false,
                         maxAge: 2592000000
                     });
-                    res.json({ message: "User logged in successfully", status: true, User });
+                    res.json({ message: "User logged in successfully", status: true, role: req.body.role });
                 } else {
                     res.json({ message: "Incorrect Password", status: false});
                 }
