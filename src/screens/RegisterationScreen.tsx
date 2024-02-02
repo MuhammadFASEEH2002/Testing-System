@@ -36,7 +36,7 @@ export default function RegisterationScreen() {
     console.log(role, firstName, lastName, email, password)
     if (role && firstName && lastName && email && password) {
       const response = await axios.post('/api/register', { role, firstName, lastName, email, password })
-      console.log(response.data.status);
+      console.log(response.data);
       if (response.data.status) {
         toast({
           title: "User Registered",

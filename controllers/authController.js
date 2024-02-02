@@ -102,10 +102,13 @@ const login = async (req, res) => {
                         httpOnly: false,
                         maxAge: 2592000000
                     });
-                    res.status(201).json({ message: "User logged in successfully", success: true, User });
+                    res.json({ message: "User logged in successfully", status: true, User });
                 } else {
-                    res.status(201).json({ message: "Incorrect Email", success: false, User });
+                    res.json({ message: "Incorrect Password", status: false});
                 }
+            }else{
+                res.json({ message: "User Doesn't Exist", status: false});
+
             }
         } else if (req.body.role == 'student') {
             const User = await db.Student.findOne({ email: req.body.email });
@@ -118,10 +121,14 @@ const login = async (req, res) => {
                         httpOnly: false,
                         maxAge: 2592000000
                     });
-                    res.status(201).json({ message: "User logged in successfully", success: true, User });
+                    res.json({ message: "User logged in successfully", status: true, User });
                 } else {
-                    res.status(201).json({ message: "Incorrect Email", success: false, User });
+                    res.json({ message: "Incorrect Password", status: false});
                 }
+            }
+            else{
+                res.json({ message: "User Doesn't Exist", status: false});
+
             }
         }
 

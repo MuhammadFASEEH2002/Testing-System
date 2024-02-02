@@ -15,13 +15,14 @@ useToast
 } from '@chakra-ui/react'
 import axios from 'axios';
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function LoginScreen() {
     const [role, setRole] = useState<string>("teacher");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 const toast=useToast()
+const navigate=useNavigate()
     const handleInputChange = (event: any, setState: any) => {
         setState(event.target.value);
     };
@@ -29,7 +30,7 @@ const toast=useToast()
         console.log(role, email, password)
         if (role  && email && password) {
           const response = await axios.post('/api/login', { role, email, password })
-          console.log(response.data.status);
+          console.log(response.data);
           if (response.data.status) {
             toast({
               title: "User Registered",
