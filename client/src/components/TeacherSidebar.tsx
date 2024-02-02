@@ -1,5 +1,3 @@
-'use client'
-
 import {
   IconButton,
   Avatar,
@@ -59,7 +57,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Favourites', icon: FiStar },
   { name: 'Settings', icon: FiSettings },
 ]
-
+import { ReactNode } from 'react';
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
     <Box
@@ -191,8 +189,11 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     </Flex>
   )
 }
+interface TeacherSidebarProps {
+  children: ReactNode;
+}
 
-export default function TeacherSidebar( {children}) {
+export default function TeacherSidebar( {children}: TeacherSidebarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
