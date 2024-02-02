@@ -192,7 +192,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   )
 }
 
-const TeacherSidebar = ({children}) => {
+export default function TeacherSidebar( {children}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -212,10 +212,8 @@ const TeacherSidebar = ({children}) => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-      { children}
+      {children}
       </Box>
     </Box>
   )
 }
-
-export default TeacherSidebar
