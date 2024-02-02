@@ -28,7 +28,7 @@ const IndexRouter = require('./routes/index.js')
 
 app.use(
   cors({
-    origin: [`https://testify-client.vercel.app`],
+    origin: [`${process.env.CORS_ORIGIN}`],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -43,6 +43,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", IndexRouter);
 
 
-
+app.get("/",(req,res)=>{
+  res.json("hello")
+})
 
 app.listen(process.env.PORT, () => {console.log(`Listening on http://127.0.0.1:${process.env.PORT}`);  console.log(process.env.MONGO_LINK)});
