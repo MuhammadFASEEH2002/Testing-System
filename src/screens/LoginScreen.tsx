@@ -11,9 +11,9 @@ import {
     Text,
     useColorModeValue,
     Radio, RadioGroup,
-
+useToast
 } from '@chakra-ui/react'
-
+import axios from 'axios';
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -21,11 +21,43 @@ export default function LoginScreen() {
     const [role, setRole] = useState<string>("teacher");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-
+const toast=useToast()
     const handleInputChange = (event: any, setState: any) => {
         setState(event.target.value);
     };
-
+    async function login() {
+        console.log(role, email, password)
+        if (role  && email && password) {
+          const response = await axios.post('/api/login', { role, email, password })
+          console.log(response.data.status);
+          if (response.data.status) {
+            toast({
+              title: "User Registered",
+              status: "success",
+              position: "top",
+              duration: 5000,
+              isClosable: true
+            })
+          } else{
+            toast({
+              title: "Authenthication Error",
+              description: response.data.message,
+              status: "error",
+              position: "top",
+              duration: 5000,
+              isClosable: true
+            })
+          }
+        } else {
+          toast({
+            title: "Empty Fields",
+            status: "error",
+            position: "top",
+            duration: 5000,
+            isClosable: true
+          })
+        }
+      }
     return (
         <Flex
             minH={'100vh'}
@@ -81,7 +113,8 @@ export default function LoginScreen() {
                                 color={'white'}
                                 _hover={{
                                     bg: 'blue.500',
-                                }}>
+                                }}
+                                onClick={()=>login()}>
                                 Sign in
                             </Button>
                             <Text align={'center'}>

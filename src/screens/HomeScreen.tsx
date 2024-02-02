@@ -1,8 +1,8 @@
 import Navbar from '../components/Navbar'
-import { Stack ,Text} from '@chakra-ui/layout'
+// import { Stack ,Text} from '@chakra-ui/layout'
 
 
-const HomeScreen = () => {
+export default function HomeScreen(){
     return (
         <>
             <Navbar>
@@ -11,4 +11,3 @@ const HomeScreen = () => {
     )
 }
 
-export default HomeScreen
