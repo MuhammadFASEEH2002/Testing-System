@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/api':{
-        target:'https://testify-nasnh49ds-muhammadfaseeh2002s-projects.vercel.app:5000',
+        target:'https://testify-ten.vercel.app:5000',
         changeOrigin: true, 
         secure: false, 
         rewrite: (path) => path.replace(/^\/api/, ''),
