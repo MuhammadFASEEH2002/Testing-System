@@ -19,6 +19,8 @@ import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import api from '../utils/api'
+
 export default function RegisterationScreen() {
   const [role, setRole] = useState<string>("teacher");
   const [firstName, setFirstName] = useState<string>("");
@@ -35,7 +37,7 @@ export default function RegisterationScreen() {
   async function registeration() {
     console.log(role, firstName, lastName, email, password)
     if (role && firstName && lastName && email && password) {
-      const response = await axios.post('/api/register', { role, firstName, lastName, email, password })
+      const response = await api.post('/api/register', { role, firstName, lastName, email, password })
       console.log(response.data);
       if (response.data.status) {
         toast({

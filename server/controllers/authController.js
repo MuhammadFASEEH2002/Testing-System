@@ -39,13 +39,13 @@ exports.register = async (req, res) => {
         }
         const hashPassword = await bcrypt.hash(req.body.password, 10);
         if (req.body.role == "teacher") {
-            const EmailExist = await db.Teacher.findOne({ email: req.body.email });
+            const EmailExist = await Teacher.findOne({ email: req.body.email });
             if (EmailExist) {
                 res.json({ status: false, message: "email already used" })
                 return;
             }
 
-            await db.Teacher.create({
+            await Teacher.create({
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
@@ -54,13 +54,13 @@ exports.register = async (req, res) => {
             res.json({ status: true, message: "user registered" })
 
         } else if (req.body.role == 'student') {
-            const EmailExist = await db.Student.findOne({ email: req.body.email });
+            const EmailExist = await Student.findOne({ email: req.body.email });
 
             if (EmailExist) {
                 res.json({ status: false, message: "email already used" })
                 return;
             }
-            await db.Student.create({
+            await Student.create({
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
@@ -96,7 +96,7 @@ exports.login = async (req, res) => {
             return;
         }
         if (req.body.role == "teacher") {
-            const User = await db.Teacher.findOne({ email: req.body.email });
+            const User = await Teacher.findOne({ email: req.body.email });
             if (User) {
                 const auth = await bcrypt.compare(req.body.password, User.password)
                 if (auth) {
@@ -115,7 +115,7 @@ exports.login = async (req, res) => {
 
             }
         } else if (req.body.role == 'student') {
-            const User = await db.Student.findOne({ email: req.body.email });
+            const User = await Student.findOne({ email: req.body.email });
             if (User) {
                 const auth = await bcrypt.compare(req.body.password, User.password)
                 if (auth) {

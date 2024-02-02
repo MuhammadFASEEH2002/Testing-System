@@ -34,7 +34,7 @@ const navigate=useNavigate()
           console.log(response.data);
           if (response.data.status) {
             toast({
-              title: "User Registered",
+              title: "User Logged In",
               status: "success",
               position: "top",
               duration: 5000,
