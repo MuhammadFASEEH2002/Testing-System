@@ -28,7 +28,7 @@ const IndexRouter = require('./routes/index.js')
 
 app.use(
   cors({
-    origin: [`${process.env.CORS_ORIGIN}`, `https://testify-client.vercel.app`],
+    origin: ['*'],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
