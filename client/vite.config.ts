@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [react()],
 // define process env
   define: {
+     //@ts-ignore
     'process.env': process.env
   }
 });
