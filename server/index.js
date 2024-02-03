@@ -7,13 +7,14 @@ const IndexRouter = require('./routes/index.js')
 
 
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "*",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
+app.use(cors())
 mongoose
   .connect(`${process.env.MONGO_LINK}`)
   .then((res) => {console.log("MongoDB connected"); console.log(process.env.CORS_ORIGIN)})
