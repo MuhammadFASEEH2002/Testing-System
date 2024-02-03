@@ -14,7 +14,7 @@ const IndexRouter = require('./routes/index.js')
 //     credentials: true,
 //   })
 // );
-app.use(cors())
+app.options('*',cors())
 mongoose
   .connect(`${process.env.MONGO_LINK}`)
   .then((res) => {console.log("MongoDB connected"); console.log(process.env.CORS_ORIGIN)})
