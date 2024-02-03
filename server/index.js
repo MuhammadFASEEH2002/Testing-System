@@ -15,8 +15,8 @@ app.use(
   })
 );
 mongoose
-  .connect(`${process.env.MONGO_LINK}`)
-  .then((res) => {console.log("MongoDB connected"); console.log(process.env.CORS_ORIGIN)})
+  .connect(`mongodb+srv://faseeh:Aeiou.123@testing-system.pnoppvs.mongodb.net/`)
+  .then((res) => {console.log("MongoDB connected")})
   .catch((err) => console.log("MongoDb Connection Failed", err));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
