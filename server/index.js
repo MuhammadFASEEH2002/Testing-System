@@ -8,11 +8,7 @@ const IndexRouter = require('./routes/index.js')
 
 
 app.use(
-  cors({
-    origin: ["http://localhost:5173","https://testify-client.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
+  cors()
 );
 mongoose
   .connect(`${process.env.MONGO_LINK}`)
