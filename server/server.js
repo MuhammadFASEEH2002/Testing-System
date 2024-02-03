@@ -21,8 +21,6 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", IndexRouter);
-
-
 app.get("/",(req,res)=>{
   res.json("hello")
 })
