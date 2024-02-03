@@ -9,14 +9,14 @@ const IndexRouter = require('./routes/index.js')
 
 app.use(
   cors({
-    origin: [`${process.env.CORS_ORIGIN}`],
+    origin: [process.env.CORS_ORIGIN],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 mongoose
   .connect(`${process.env.MONGO_LINK}`)
-  .then((res) => console.log("MongoDB connected"))
+  .then((res) => {console.log("MongoDB connected"); console.log(process.env.CORS_ORIGIN)})
   .catch((err) => console.log("MongoDb Connection Failed", err));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
