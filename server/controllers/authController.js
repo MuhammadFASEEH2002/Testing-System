@@ -103,15 +103,15 @@ exports.login = async (req, res) => {
             if (User) {
                 const auth = await bcrypt.compare(req.body.password, User.password)
                 if (auth) {
-                    const token = await jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
-                    await res.cookie("teacherToken", token, {
-                        withCredentials: true,
-                        httpOnly: false,
-                        maxAge: 2592000000,
-                        sameSite: "None",
-                        secure: true
-                    });
-                    res.json({ message: "User logged in successfully", status: true, role: req.body.role });
+                    const teacherToken = await jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
+                    // await res.cookie("teacherToken", token, {
+                    //     withCredentials: true,
+                    //     httpOnly: false,
+                    //     maxAge: 2592000000,
+                    //     sameSite: "None",
+                    //     secure: true
+                    // });
+                    res.json({ message: "User logged in successfully", status: true, role: req.body.role, teacherToken });
                 } else {
                     res.json({ message: "Incorrect Password", status: false });
                 }
@@ -124,15 +124,15 @@ exports.login = async (req, res) => {
             if (User) {
                 const auth = await bcrypt.compare(req.body.password, User.password)
                 if (auth) {
-                    const token = await jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
-                    await res.cookie("studentToken", token, {
-                        withCredentials: true,
-                        httpOnly: false,
-                        maxAge: 2592000000,
-                        sameSite: "None",
-                        secure: true
-                    });
-                    res.json({ message: "User logged in successfully", status: true, role: req.body.role });
+                    const studentToken = await jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
+                    // await res.cookie("studentToken", token, {
+                    //     withCredentials: true,
+                    //     httpOnly: false,
+                    //     maxAge: 2592000000,
+                    //     sameSite: "None",
+                    //     secure: true
+                    // });
+                    res.json({ message: "User logged in successfully", status: true, role: req.body.role, studentToken });
                 } else {
                     res.json({ message: "Incorrect Password", status: false });
                 }

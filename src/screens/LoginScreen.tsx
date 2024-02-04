@@ -27,7 +27,8 @@ export default function LoginScreen() {
     const handleInputChange = (event: any, setState: any) => {
         setState(event.target.value);
     };
-    const [cookies] = useCookies();
+ 
+    const [cookies, setCookies] = useCookies();
     async function checkToken() {
         const teachertoken = cookies.teacherToken;
         const studenttoken = cookies.studentToken;
@@ -35,8 +36,10 @@ export default function LoginScreen() {
         if (teachertoken) {
             navigate('/login/teacher/home');
 
-        } else if(studenttoken){
+        } else if (studenttoken) {
             navigate('/login/student/home');
+        }else{
+            console.log("no token")
         }
 
     }
@@ -58,9 +61,14 @@ export default function LoginScreen() {
                     duration: 5000,
                     isClosable: true
                 })
+                const expiryDate = new Date(); // Create a new Date object
+                expiryDate.setDate(expiryDate.getDate() + 7);
                 if (response.data.role == "teacher") {
+                    setCookies('teacherToken', response.data.teacherToken, { expires: expiryDate, path: '/' });
                     navigate('/login/teacher/home')
                 } else {
+                    setCookies('studentToken', response.data.studentToken, { expires: expiryDate, path: '/' });
+
                     navigate('/login/student/home')
 
                 }
