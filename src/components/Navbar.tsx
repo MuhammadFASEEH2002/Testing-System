@@ -4,21 +4,18 @@ import {
   Text,
   Button,
   Stack,
-  Collapse,
   Icon,
   Popover,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
   useBreakpointValue,
-  useDisclosure,
   useColorMode
 } from '@chakra-ui/react'
 import {
-  ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons'
-import { MdDarkMode,MdOutlineDarkMode  } from "react-icons/md";
+import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
 
 export default function Navbar() {
   // const { isOpen, onToggle } = useDisclosure()
@@ -59,10 +56,10 @@ export default function Navbar() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-            
-            <Button onClick={toggleColorMode}  size={{ base: 'md', md: 'md', lg: 'md' }}>
-                {colorMode === 'light' ? <MdDarkMode/> : <MdOutlineDarkMode/>}
-            </Button>
+
+          <Button onClick={toggleColorMode} size={{ base: 'md', md: 'md', lg: 'md' }}>
+            {colorMode === 'light' ? <MdDarkMode /> : <MdOutlineDarkMode />}
+          </Button>
         </Stack>
       </Flex>
     </Box>
@@ -162,42 +159,42 @@ interface NavItem {
 }
 
 const NAV_ITEMS: Array<NavItem> = [
-//   {
-//     label: 'Inspiration',
-//     children: [
-//       {
-//         label: 'Explore Design Work',
-//         subLabel: 'Trending Design to inspire you',
-//         href: '#',
-//       },
-//       {
-//         label: 'New & Noteworthy',
-//         subLabel: 'Up-and-coming Designers',
-//         href: '#',
-//       },
-//     ],
-//   },
-//   {
-//     label: 'Find Work',
-//     children: [
-//       {
-//         label: 'Job Board',
-//         subLabel: 'Find your dream design job',
-//         href: '#',
-//       },
-//       {
-//         label: 'Freelance Projects',
-//         subLabel: 'An exclusive list for contract work',
-//         href: '#',
-//       },
-//     ],
-//   },
-//   {
-//     label: 'Learn Design',
-//     href: '#',
-//   },
-//   {
-//     label: 'Hire Designers',
-//     href: '#',
-//   },
+  //   {
+  //     label: 'Inspiration',
+  //     children: [
+  //       {
+  //         label: 'Explore Design Work',
+  //         subLabel: 'Trending Design to inspire you',
+  //         href: '#',
+  //       },
+  //       {
+  //         label: 'New & Noteworthy',
+  //         subLabel: 'Up-and-coming Designers',
+  //         href: '#',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     label: 'Find Work',
+  //     children: [
+  //       {
+  //         label: 'Job Board',
+  //         subLabel: 'Find your dream design job',
+  //         href: '#',
+  //       },
+  //       {
+  //         label: 'Freelance Projects',
+  //         subLabel: 'An exclusive list for contract work',
+  //         href: '#',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     label: 'Learn Design',
+  //     href: '#',
+  //   },
+  //   {
+  //     label: 'Hire Designers',
+  //     href: '#',
+  //   },
 ]
