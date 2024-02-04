@@ -39,7 +39,7 @@ export default function LoginScreen() {
             navigate('/login/student/home');
         }
 
-    } console.log("no token")
+    }
 
     useEffect(() => {
         // Effect function
