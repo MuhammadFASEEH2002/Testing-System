@@ -41,7 +41,7 @@ export default function LoginScreen() {
         } else if (studenttoken) {
             navigate('/login/student/home');
         } else {
-            console.log("no token")
+            // console.log("no token")
         }
 
     }
