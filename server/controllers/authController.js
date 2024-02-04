@@ -46,10 +46,12 @@ exports.register = async (req, res) => {
             }
 
             await Teacher.create({
+                role: req.body.role,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
                 password: hashPassword,
+
             })
             res.json({ status: true, message: "user registered" })
 
@@ -61,6 +63,7 @@ exports.register = async (req, res) => {
                 return;
             }
             await Student.create({
+                role: req.body.role,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
@@ -101,7 +104,7 @@ exports.login = async (req, res) => {
                 const auth = await bcrypt.compare(req.body.password, User.password)
                 if (auth) {
                     const token = jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
-                    res.cookie("token", token, {
+                    res.cookie("teacherToken", token, {
                         withCredentials: true,
                         httpOnly: false,
                         maxAge: 2592000000
@@ -120,7 +123,7 @@ exports.login = async (req, res) => {
                 const auth = await bcrypt.compare(req.body.password, User.password)
                 if (auth) {
                     const token = jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
-                    res.cookie("token", token, {
+                    res.cookie("studentToken", token, {
                         withCredentials: true,
                         httpOnly: false,
                         maxAge: 2592000000

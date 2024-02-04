@@ -191,18 +191,18 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     </Flex>
   )
 }
-interface TeacherSidebarProps {
+interface StudentSidebarProps {
   children: ReactNode;
 }
 
-export default function TeacherSidebar( {children}: TeacherSidebarProps) {
-  const navigate= useNavigate();
-
+export default function StudentSidebar( {children}: StudentSidebarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [cookies, setCookie]= useCookies();
+  const navigate= useNavigate();
+
     //@ts-ignore
 async function checkToken() {
-  const token = cookies.teacherToken
+  const token = cookies.studentToken
   if (!token) {
     navigate('/login')
 

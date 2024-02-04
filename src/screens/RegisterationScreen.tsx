@@ -17,8 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
 import api from '../utils/api'
 
 export default function RegisterationScreen() {
@@ -34,6 +33,7 @@ export default function RegisterationScreen() {
   };
 
   const toast = useToast();
+  const navigate= useNavigate();
   async function registeration() {
     console.log(role, firstName, lastName, email, password)
     if (role && firstName && lastName && email && password) {
@@ -47,6 +47,8 @@ export default function RegisterationScreen() {
           duration: 5000,
           isClosable: true
         })
+        navigate('/login')
+
       } else{
         toast({
           title: "Authenthication Error",

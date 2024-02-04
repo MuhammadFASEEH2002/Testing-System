@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
-const verifyToken = (req, res, next) => {
-    const token = req.cookies.token
+exports.verifyTeacherToken = (req, res, next) => {
+    const token = req.cookies.teachertToken
     if (!token) {
         return res.json({ status: false , message : 'User Not Authorized'  })
     }
@@ -14,5 +14,3 @@ const verifyToken = (req, res, next) => {
         }
     })
 }
-
-module.exports = verifyToken

@@ -13,9 +13,10 @@ import {
     Radio, RadioGroup,
     useToast
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import api from '../utils/api';
+import { useCookies } from 'react-cookie'
 
 export default function LoginScreen() {
     const [role, setRole] = useState<string>("teacher");
@@ -26,6 +27,24 @@ export default function LoginScreen() {
     const handleInputChange = (event: any, setState: any) => {
         setState(event.target.value);
     };
+    const [cookies, setCookie] = useCookies();
+    async function checkToken() {
+        const teachertoken = cookies.teacherToken;
+        const studenttoken = cookies.studentToken;
+
+        if (teachertoken) {
+            navigate('/login/teacher/home');
+
+        } else if(studenttoken){
+            navigate('/login/student/home');
+        }
+
+    } console.log("no token")
+
+    useEffect(() => {
+        // Effect function
+        checkToken()
+    }, []);
     async function login() {
         console.log(role, email, password)
         if (role && email && password) {
@@ -42,6 +61,7 @@ export default function LoginScreen() {
                 if (response.data.role == "teacher") {
                     navigate('/login/teacher/home')
                 } else {
+                    navigate('/login/student/home')
 
                 }
             } else {
