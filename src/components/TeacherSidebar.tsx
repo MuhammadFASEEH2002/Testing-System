@@ -202,7 +202,7 @@ export default function TeacherSidebar( {children}: TeacherSidebarProps) {
   const [cookies]= useCookies();
     //@ts-ignore
 async function checkToken() {
-  const token = cookies.teacherToken
+  const token = await cookies.teacherToken;
   if (!token) {
     navigate('/login')
 
@@ -210,7 +210,7 @@ async function checkToken() {
     console.log(token)
   }
  
-} console.log("no token")
+}
 
 useEffect(() => {
   // Effect function
