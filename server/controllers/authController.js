@@ -103,8 +103,8 @@ exports.login = async (req, res) => {
             if (User) {
                 const auth = await bcrypt.compare(req.body.password, User.password)
                 if (auth) {
-                    const token = jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
-                    res.cookie("teacherToken", token, {
+                    const token = await jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
+                    await res.cookie("teacherToken", token, {
                         withCredentials: true,
                         httpOnly: false,
                         maxAge: 2592000000
@@ -122,8 +122,8 @@ exports.login = async (req, res) => {
             if (User) {
                 const auth = await bcrypt.compare(req.body.password, User.password)
                 if (auth) {
-                    const token = jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
-                    res.cookie("studentToken", token, {
+                    const token = await jwt.sign({ id: User._id }, "token", { expiresIn: '30d' })
+                    await res.cookie("studentToken", token, {
                         withCredentials: true,
                         httpOnly: false,
                         maxAge: 2592000000
