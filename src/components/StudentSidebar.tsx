@@ -197,7 +197,7 @@ interface StudentSidebarProps {
 
 export default function StudentSidebar( {children}: StudentSidebarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [cookies, setCookie]= useCookies();
+  const [cookies]= useCookies();
   const navigate= useNavigate();
 
     //@ts-ignore

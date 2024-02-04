@@ -199,7 +199,7 @@ export default function TeacherSidebar( {children}: TeacherSidebarProps) {
   const navigate= useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [cookies, setCookie]= useCookies();
+  const [cookies]= useCookies();
     //@ts-ignore
 async function checkToken() {
   const token = cookies.teacherToken

@@ -27,7 +27,7 @@ export default function LoginScreen() {
     const handleInputChange = (event: any, setState: any) => {
         setState(event.target.value);
     };
-    const [cookies, setCookie] = useCookies();
+    const [cookies] = useCookies();
     async function checkToken() {
         const teachertoken = cookies.teacherToken;
         const studenttoken = cookies.studentToken;
