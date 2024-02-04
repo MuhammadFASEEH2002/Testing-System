@@ -52,10 +52,10 @@ export default function LoginScreen() {
     }, []);
     async function login() {
         setLoading(true);
-        console.log(role, email, password)
+        // console.log(role, email, password)
         if (role && email && password) {
             const response = await api.post('/api/login', { role, email, password })
-            console.log(response.data);
+            // console.log(response.data);
             if (response.data.status) {
                 toast({
                     title: "User Logged In",
@@ -71,9 +71,7 @@ export default function LoginScreen() {
                     navigate('/login/teacher/home')
                 } else {
                     setCookies('studentToken', response.data.studentToken, { expires: expiryDate, path: '/' });
-
                     navigate('/login/student/home')
-
                 }
             } else {
                 toast({
@@ -84,6 +82,7 @@ export default function LoginScreen() {
                     duration: 5000,
                     isClosable: true
                 })
+                setLoading(false);
             }
         } else {
             toast({
@@ -93,6 +92,7 @@ export default function LoginScreen() {
                 duration: 5000,
                 isClosable: true
             })
+            setLoading(false);
         }
     }
     return (
