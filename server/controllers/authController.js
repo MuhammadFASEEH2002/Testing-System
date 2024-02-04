@@ -2,8 +2,8 @@
 const Student = require("../models/Student.js");
 const Teacher = require("../models/Teacher.js");
 
-const jwt=require("jsonwebtoken")
-const bcrypt=require("bcrypt")
+const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
 
 exports.register = async (req, res) => {
     try {
@@ -107,14 +107,16 @@ exports.login = async (req, res) => {
                     await res.cookie("teacherToken", token, {
                         withCredentials: true,
                         httpOnly: false,
-                        maxAge: 2592000000
+                        maxAge: 2592000000,
+                        sameSite: "None",
+                        secure: true
                     });
-                    res.json({ message: "User logged in successfully", status: true, role: req.body.role  });
+                    res.json({ message: "User logged in successfully", status: true, role: req.body.role });
                 } else {
-                    res.json({ message: "Incorrect Password", status: false});
+                    res.json({ message: "Incorrect Password", status: false });
                 }
-            }else{
-                res.json({ message: "User Doesn't Exist", status: false});
+            } else {
+                res.json({ message: "User Doesn't Exist", status: false });
 
             }
         } else if (req.body.role == 'student') {
@@ -126,15 +128,17 @@ exports.login = async (req, res) => {
                     await res.cookie("studentToken", token, {
                         withCredentials: true,
                         httpOnly: false,
-                        maxAge: 2592000000
+                        maxAge: 2592000000,
+                        sameSite: "None",
+                        secure: true
                     });
                     res.json({ message: "User logged in successfully", status: true, role: req.body.role });
                 } else {
-                    res.json({ message: "Incorrect Password", status: false});
+                    res.json({ message: "Incorrect Password", status: false });
                 }
             }
-            else{
-                res.json({ message: "User Doesn't Exist", status: false});
+            else {
+                res.json({ message: "User Doesn't Exist", status: false });
 
             }
         }
