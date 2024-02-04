@@ -21,7 +21,7 @@ import {
 import { MdDarkMode,MdOutlineDarkMode  } from "react-icons/md";
 
 export default function Navbar() {
-  const { isOpen, onToggle } = useDisclosure()
+  // const { isOpen, onToggle } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
@@ -65,10 +65,6 @@ export default function Navbar() {
             </Button>
         </Stack>
       </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
     </Box>
   )
 }
