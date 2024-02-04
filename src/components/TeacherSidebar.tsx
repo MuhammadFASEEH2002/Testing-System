@@ -15,9 +15,9 @@ import {
 } from '@chakra-ui/react'
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
+  // FiTrendingUp,
+  // FiCompass,
+  // FiStar,
   FiSettings,
   FiMenu,
 } from 'react-icons/fi'
@@ -26,6 +26,7 @@ import { useCookies } from 'react-cookie'
 interface LinkItemProps {
   name: string
   icon: IconType
+  link: string
 }
 
 interface NavItemProps extends FlexProps {
@@ -42,14 +43,15 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Create Test', icon: FiTrendingUp },
-  { name: 'Total Test', icon: FiCompass },
-  { name: 'Results', icon: FiStar },
-  { name: 'Logout', icon: FiSettings },
+  { name: 'Home', icon: FiHome, link: "/login/teacher/home" },
+  // { name: 'Create Test', icon: FiTrendingUp,link:"" },
+  // { name: 'Total Test', icon: FiCompass, },
+  // { name: 'Results', icon: FiStar },
+  { name: 'Logout', icon: FiSettings , link:"/login/teacher/logout"},
 ]
 import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
@@ -69,9 +71,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
+     < Link to={link.link}>
         <NavItem key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>
+        </Link>
       ))}
     </Box>
   )
