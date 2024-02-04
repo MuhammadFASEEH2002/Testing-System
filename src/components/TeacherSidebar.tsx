@@ -1,11 +1,9 @@
 import {
   IconButton,
-  Avatar,
   Box,
   CloseButton,
   Flex,
   HStack,
-  VStack,
   Icon,
   useColorModeValue,
   Text,
@@ -14,11 +12,6 @@ import {
   useDisclosure,
   BoxProps,
   FlexProps,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
 } from '@chakra-ui/react'
 import {
   FiHome,
@@ -27,8 +20,6 @@ import {
   FiStar,
   FiSettings,
   FiMenu,
-  FiBell,
-  FiChevronDown,
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
