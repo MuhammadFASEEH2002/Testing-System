@@ -7,6 +7,7 @@ import TeacherHome from "./screens/teacher/TeacherHome";
 import StudentHome from "./screens/student/StudentHome";
 import TeacherLogout from "./screens/teacher/TeacherLogout";
 import StudentLogout from "./screens/student/StudentLogout";
+import TeacherCreateTest from "./screens/teacher/TeacherCreateTest";
 
 function App() {
   return (
@@ -17,10 +18,10 @@ function App() {
           <Route path="/register" element={<RegisterationScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/login/teacher/home" element={<TeacherHome/>} />
+          <Route path="/login/teacher/create-test" element={<TeacherCreateTest/>} />
           <Route path="/login/teacher/logout" element={<TeacherLogout/>} />
           <Route path="/login/student/home" element={<StudentHome />}/>
           <Route path="/login/student/logout" element={<StudentLogout/>} />
-
         </Routes>
       </Router>
     </>

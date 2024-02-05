@@ -23,6 +23,7 @@ import {
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
+import { MdCreate } from "react-icons/md";
 interface LinkItemProps {
   name: string
   icon: IconType
@@ -44,7 +45,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, link: "/login/teacher/home" },
-  // { name: 'Create Test', icon: FiTrendingUp,link:"" },
+  { name: 'Create Test', icon:  MdCreate ,link:"/login/teacher/create-test" },
   // { name: 'Total Test', icon: FiCompass, },
   // { name: 'Results', icon: FiStar },
   { name: 'Logout', icon: FiSettings , link:"/login/teacher/logout"},
