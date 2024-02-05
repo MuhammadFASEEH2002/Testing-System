@@ -36,44 +36,56 @@ export default function RegisterationScreen() {
   const toast = useToast();
   const navigate = useNavigate();
   async function registeration() {
-    setLoading(true);
-    // console.log(role, firstName, lastName, email, password)
-    if (role && firstName && lastName && email && password) {
-      const response = await api.post('/api/register', { role, firstName, lastName, email, password })
-      console.log(response.data);
-      if (response.data.status) {
-        toast({
-          title: "User Registered",
-          status: "success",
-          position: "top",
-          duration: 5000,
-          isClosable: true
-        })
-        navigate('/login')
+    try {
+      setLoading(true);
+      // console.log(role, firstName, lastName, email, password)
+      if (role && firstName && lastName && email && password) {
+        const response = await api.post('/api/register', { role, firstName, lastName, email, password })
+        // console.log(response.data);
+        if (response.data.status) {
+          toast({
+            title: "User Registered",
+            status: "success",
+            position: "top",
+            duration: 5000,
+            isClosable: true
+          })
+          navigate('/login')
 
+        } else {
+          toast({
+            title: "Authenthication Error",
+            description: response.data.message,
+            status: "error",
+            position: "top",
+            duration: 5000,
+            isClosable: true
+          })
+          setLoading(false);
+
+        }
       } else {
         toast({
-          title: "Authenthication Error",
-          description: response.data.message,
+          title: "Empty Fields",
           status: "error",
           position: "top",
           duration: 5000,
           isClosable: true
         })
         setLoading(false);
-
       }
-    } else {
+    } catch (error) {
       toast({
-        title: "Empty Fields",
+        title: "Network Error",
         status: "error",
         position: "top",
         duration: 5000,
         isClosable: true
       })
-      setLoading(false);
+      navigate('/')
 
     }
+
   }
   return (
     <>

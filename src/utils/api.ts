@@ -3,7 +3,7 @@ import axios from 'axios'
 const api = axios.create({
    //@ts-ignore
   baseURL : `${process.env.AXIOS_LINK}`,
-  timeout : 30000,
+  timeout : 15000,
   withCredentials : true
 })
 

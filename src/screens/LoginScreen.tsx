@@ -51,32 +51,43 @@ export default function LoginScreen() {
         checkToken()
     }, []);
     async function login() {
-        setLoading(true);
-        // console.log(role, email, password)
-        if (role && email && password) {
-            const response = await api.post('/api/login', { role, email, password })
-            // console.log(response.data);
-            if (response.data.status) {
-                toast({
-                    title: "User Logged In",
-                    status: "success",
-                    position: "top",
-                    duration: 5000,
-                    isClosable: true
-                })
-                const expiryDate = new Date(); // Create a new Date object
-                expiryDate.setDate(expiryDate.getDate() + 7);
-                if (response.data.role == "teacher") {
-                    setCookies('teacherToken', response.data.teacherToken, { expires: expiryDate, path: '/' });
-                    navigate('/login/teacher/home')
+        try {
+            setLoading(true);
+            // console.log(role, email, password)
+            if (role && email && password) {
+                const response = await api.post('/api/login', { role, email, password })
+                // console.log(response.data);
+                if (response.data.status) {
+                    toast({
+                        title: "User Logged In",
+                        status: "success",
+                        position: "top",
+                        duration: 5000,
+                        isClosable: true
+                    })
+                    const expiryDate = new Date(); // Create a new Date object
+                    expiryDate.setDate(expiryDate.getDate() + 7);
+                    if (response.data.role == "teacher") {
+                        setCookies('teacherToken', response.data.teacherToken, { expires: expiryDate, path: '/' });
+                        navigate('/login/teacher/home')
+                    } else {
+                        setCookies('studentToken', response.data.studentToken, { expires: expiryDate, path: '/' });
+                        navigate('/login/student/home')
+                    }
                 } else {
-                    setCookies('studentToken', response.data.studentToken, { expires: expiryDate, path: '/' });
-                    navigate('/login/student/home')
+                    toast({
+                        title: "Auth Error",
+                        description: response.data.message,
+                        status: "error",
+                        position: "top",
+                        duration: 5000,
+                        isClosable: true
+                    })
+                    setLoading(false);
                 }
             } else {
                 toast({
-                    title: "Authenthication Error",
-                    description: response.data.message,
+                    title: "Empty Fields",
                     status: "error",
                     position: "top",
                     duration: 5000,
@@ -84,16 +95,19 @@ export default function LoginScreen() {
                 })
                 setLoading(false);
             }
-        } else {
+        } catch (error) {
             toast({
-                title: "Empty Fields",
+                title: "Network Error",
+              
                 status: "error",
                 position: "top",
                 duration: 5000,
                 isClosable: true
             })
-            setLoading(false);
+            navigate('/')
         }
+        
+
     }
     return (
         <>
