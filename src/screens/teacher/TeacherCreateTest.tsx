@@ -32,24 +32,35 @@ export default function TeacherCreateTest() {
     const teacherToken = cookies.teacherToken
 
     async function createTest() {
-        setLoading(true);
-        // console.log(role, email, password)
-        if (testid && testname) {
-            const response = await api.post('/api/create-test', { testid, testname, teacherToken })
-            // console.log(response.data);
-            if (response.data.status) {
-                toast({
-                    title: "Test Created",
-                    status: "success",
-                    position: "top",
-                    duration: 5000,
-                    isClosable: true
-                })
-                navigate("/login/teacher/home")
+        try {
+            setLoading(true);
+            // console.log(role, email, password)
+            if (testid && testname) {
+                const response = await api.post('/api/create-test', { testid, testname, teacherToken })
+                // console.log(response.data);
+                if (response.data.status) {
+                    toast({
+                        title: "Test Created",
+                        status: "success",
+                        position: "top",
+                        duration: 5000,
+                        isClosable: true
+                    })
+                    navigate("/login/teacher/home")
+                } else {
+                    toast({
+                        title: "Authenthication Error",
+                        description: response.data.message,
+                        status: "error",
+                        position: "top",
+                        duration: 5000,
+                        isClosable: true
+                    })
+                    setLoading(false);
+                }
             } else {
                 toast({
-                    title: "Authenthication Error",
-                    description: response.data.message,
+                    title: "Empty Fields",
                     status: "error",
                     position: "top",
                     duration: 5000,
@@ -57,16 +68,18 @@ export default function TeacherCreateTest() {
                 })
                 setLoading(false);
             }
-        } else {
+        } catch (error) {
             toast({
-                title: "Empty Fields",
+                title: "Network Error",
                 status: "error",
                 position: "top",
                 duration: 5000,
                 isClosable: true
-            })
-            setLoading(false);
+              })
+              navigate('/')
+        
         }
+
     }
     return (<>
         <TeacherSidebar>
