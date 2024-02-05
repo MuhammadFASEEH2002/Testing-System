@@ -9,13 +9,13 @@ const IndexRouter = require('./routes/index.js')
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://testify-client.vercel.app"],
+    origin: [`${process.env.ORIGIN_LINK}`],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 mongoose
-  .connect(`mongodb+srv://faseeh:Aeiou.123@testing-system.pnoppvs.mongodb.net/`)
+  .connect(`${process.env.MONGO_LINK}`)
   .then((res) => {console.log("MongoDB connected")})
   .catch((err) => console.log("MongoDb Connection Failed", err));
 app.use(express.json());

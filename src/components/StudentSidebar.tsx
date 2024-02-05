@@ -15,9 +15,9 @@ import {
 } from '@chakra-ui/react'
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
+  // FiTrendingUp,
+  // FiCompass,
+  // FiStar,
   FiSettings,
   FiMenu,
 } from 'react-icons/fi'
@@ -25,7 +25,8 @@ import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
 interface LinkItemProps {
   name: string
-  icon: IconType
+  icon: IconType,
+  link: string
 }
 
 interface NavItemProps extends FlexProps {
@@ -42,14 +43,15 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Create Test', icon: FiTrendingUp },
-  { name: 'Total Test', icon: FiCompass },
-  { name: 'Results', icon: FiStar },
-  { name: 'Logout', icon: FiSettings },
+  { name: 'Home', icon: FiHome, link: "/login/student/home" },
+  // { name: 'Create Test', icon: FiTrendingUp },
+  // { name: 'Total Test', icon: FiCompass },
+  // { name: 'Results', icon: FiStar },
+  { name: 'Logout', icon: FiSettings, link: "/login/student/logout" },
 ]
 import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
@@ -69,9 +71,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
+        <Link to={link.link}>
+          <NavItem key={link.name} icon={link.icon}>
+            {link.name}
+          </NavItem>
+        </Link>
       ))}
     </Box>
   )
@@ -141,7 +145,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <Flex alignItems={'center'}>   
+        <Flex alignItems={'center'}>
         </Flex>
       </HStack>
     </Flex>
@@ -151,27 +155,27 @@ interface StudentSidebarProps {
   children: ReactNode;
 }
 
-export default function StudentSidebar( {children}: StudentSidebarProps) {
+export default function StudentSidebar({ children }: StudentSidebarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [cookies]= useCookies();
-  const navigate= useNavigate();
+  const [cookies] = useCookies();
+  const navigate = useNavigate();
 
-    //@ts-ignore
-async function checkToken() {
-  const token = await cookies.studentToken
-  if (!token) {
-    navigate('/login')
+  //@ts-ignore
+  async function checkToken() {
+    const token = await cookies.studentToken
+    if (!token) {
+      navigate('/login')
 
-  }else{
-    console.log(token)
+    } else {
+      console.log(token)
+    }
+
   }
- 
-} 
 
-useEffect(() => {
-  // Effect function
-  checkToken()
-}, []);
+  useEffect(() => {
+    // Effect function
+    checkToken()
+  }, []);
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -189,7 +193,7 @@ useEffect(() => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-      {children}
+        {children}
       </Box>
     </Box>
   )
