@@ -55,4 +55,22 @@ exports.createTest = async (req, res) => {
 
     }
 }
+exports.getTests = async (req, res) => {
+    try {
+        const teacher = await Teacher.findOne({ _id: req.user })
+        if (teacher) {
+           const test= await Test.find({teacher:teacher._id}).populate(
+            "teacher"
+          );
+           if(test){
+           res.json({ status: true, message: "test found" , test})
+           }else{
+        res.json({ status: false, message: "no test available" })
 
+           }
+        }
+    } catch (error) {
+        res.json({ status: false, message: error.message })
+
+    }
+}

@@ -24,6 +24,7 @@ import {
 import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
 import { MdCreate } from "react-icons/md";
+import { CiBoxList } from "react-icons/ci";
 interface LinkItemProps {
   name: string
   icon: IconType
@@ -46,7 +47,7 @@ interface SidebarProps extends BoxProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, link: "/login/teacher/home" },
   { name: 'Create Test', icon:  MdCreate ,link:"/login/teacher/create-test" },
-  // { name: 'Total Test', icon: FiCompass, },
+  { name: 'My Tests', icon: CiBoxList ,link:"/login/teacher/my-tests" },
   // { name: 'Results', icon: FiStar },
   { name: 'Logout', icon: FiSettings , link:"/login/teacher/logout"},
 ]
@@ -169,7 +170,7 @@ async function checkToken() {
     navigate('/login')
 
   }else{
-    console.log(token)
+    // console.log(token)
   }
  
 }

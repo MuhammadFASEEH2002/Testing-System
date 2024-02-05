@@ -10,6 +10,8 @@ router.post('/login', authController.login)
 // teacher routes
 router.post('/get-teacher', verifyTeacherToken , teacherController.getTeacher)
 router.post('/create-test', verifyTeacherToken , teacherController.createTest)
+router.post('/get-test', verifyTeacherToken , teacherController.getTests)
+
 
 
 // student routes
