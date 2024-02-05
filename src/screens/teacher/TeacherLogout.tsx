@@ -14,6 +14,5 @@ export default function TeacherLogout() {
   useEffect(() => {
     logout();
   }, []);
-
   return <></>;
 }

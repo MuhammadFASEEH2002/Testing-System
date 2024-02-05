@@ -106,8 +106,6 @@ export default function LoginScreen() {
             })
             navigate('/')
         }
-        
-
     }
     return (
         <>
@@ -158,7 +156,7 @@ export default function LoginScreen() {
                                         direction={{ base: 'column', sm: 'row' }}
                                         align={'start'}
                                         justify={'space-between'}>
-                                        <Checkbox>Remember me</Checkbox>
+                                        {/* <Checkbox>Remember me</Checkbox> */}
                                         <Text color={'blue.400'}>Forgot password?</Text>
                                     </Stack>
                                     <Button
@@ -171,7 +169,7 @@ export default function LoginScreen() {
                                         Sign in
                                     </Button>
                                     <Text align={'center'}>
-                                        Don't have an Account?<Link color={'blue.400'} to={"/register"}> Sign Up</Link>
+                                        Don't have an Account?<Link to={"/register"}>Sign Up</Link>
                                     </Text>
                                 </Stack>
                             </Stack>
