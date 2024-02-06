@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import { Text, useToast, Stack, HStack, Heading, Card, CardBody, Divider, CardFooter, Button, ButtonGroup, Spinner } from '@chakra-ui/react';
 import api from '../../utils/api';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default function TeacherMyTests() {
     type Test = {
+        _id: Object,
         testId: string,
         testName: string,
         teacher: Teacher
@@ -87,8 +89,11 @@ export default function TeacherMyTests() {
                                         <Button variant='ghost' colorScheme='blue'>
                                             View Test
                                         </Button>
+
                                         <Button variant='solid' colorScheme='blue'>
+                                            <Link to={`/login/teacher/add-question/${tests._id}`}>
                                             Add Question
+                                            </Link>
                                         </Button>
                                     </ButtonGroup>
                                 </CardFooter>
