@@ -11,7 +11,7 @@ export default function TeacherAddQuestion() {
     // const [loading, setLoading] = useState(false);
     const [numOptions, setNumOptions] = useState('2');
     
-    // const [question, setQuestion] = useState('');
+    const [question, setQuestion] = useState('');
     const [options, setOptions] = useState<string[]>([]);
     const handleInputChange = (event: any, setState: any) => {
         setState(event.target.value);
@@ -24,6 +24,7 @@ export default function TeacherAddQuestion() {
         newOptions[index] = event.target.value;
         setOptions(newOptions);
     };
+    console.log(question)
     return (
         <>
             <TeacherSidebar>
