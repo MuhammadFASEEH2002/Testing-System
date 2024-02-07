@@ -17,7 +17,7 @@ router.post('/add-question', verifyTeacherToken , teacherController.addQuestion)
 
 
 // student routes
-router.get('/get-full-test', teacherController.getTests)
+// router.get('/get-full-test', teacherController.getTests)
 
 
 

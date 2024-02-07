@@ -104,22 +104,22 @@ exports.addQuestion = async (req, res) => {
 }
 
 
-exports.getTests = async (req, res) => {
-    try {
-        // const teacher = await Teacher.findOne({ _id: req.user })
-        // if (teacher) {
-            const question = await Question.find().populate(
-                "test"
-            )
-            // if (test) {
-                res.json({ status: true, message: "test found", question })
-            // } else {
-            //     res.json({ status: false, message: "no test available" })
+// exports.getTests = async (req, res) => {
+//     try {
+//         // const teacher = await Teacher.findOne({ _id: req.user })
+//         // if (teacher) {
+//             const question = await Question.find().populate(
+//                 "test"
+//             )
+//             // if (test) {
+//                 res.json({ status: true, message: "test found", question })
+//             // } else {
+//             //     res.json({ status: false, message: "no test available" })
 
-            // }
+//             // }
         
-    } catch (error) {
-        res.json({ status: false, message: error.message })
+//     } catch (error) {
+//         res.json({ status: false, message: error.message })
 
-    }
-}
+//     }
+// }

@@ -9,22 +9,24 @@ import {
     RadioGroup,
     HStack,
     Button,
-    useToast
+    useToast,
+    Spinner
 } from '@chakra-ui/react';
 import api from '../../utils/api';
 import { useCookies } from 'react-cookie';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 export default function TeacherAddQuestion() {
     const [numOptions, setNumOptions] = useState('');
     const [correct, setCorrect] = useState("");
     const [question, setQuestion] = useState('');
+    const [loading, setLoading] = useState(false);
     const [options, setOptions] = useState<{ text: string; isCorrect: boolean }[]>([]);
     const toast = useToast();
     const [cookies] = useCookies();
     const { id } = useParams<{ id: string }>();
     const teacherToken = cookies.teacherToken;
-
+    const navigate = useNavigate()
     const handleInputChange = (event: any, setState: any) => {
         setState(event.target.value);
     };
@@ -37,16 +39,19 @@ export default function TeacherAddQuestion() {
 
     async function addQuestion() {
         try {
+            setLoading(true);
+
             if (question && options.every(option => option.text.trim() !== '')) {
                 const response = await api.post('/api/add-question', { question, options, teacherToken, id });
                 if (response.data.status) {
                     toast({
-                        title: "User Logged In",
+                        title: "Question Created",
                         status: "success",
                         position: "top",
                         duration: 5000,
                         isClosable: true
                     });
+                    navigate("/login/teacher/my-tests")
                 } else {
                     toast({
                         title: "Auth Error",
@@ -56,6 +61,7 @@ export default function TeacherAddQuestion() {
                         duration: 5000,
                         isClosable: true
                     });
+                    setLoading(false);
                 }
             } else {
                 toast({
@@ -65,6 +71,7 @@ export default function TeacherAddQuestion() {
                     duration: 5000,
                     isClosable: true
                 });
+                setLoading(false);
             }
         } catch (error) {
             toast({
@@ -74,12 +81,12 @@ export default function TeacherAddQuestion() {
                 duration: 5000,
                 isClosable: true
             });
+            setLoading(false);
         }
     }
-
     return (
         <>
-            <TeacherSidebar>
+            {loading ? (<><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack></>) : (<><TeacherSidebar>
                 <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
                     <Stack width={"50%"}>
                         <FormControl isRequired>
@@ -98,8 +105,23 @@ export default function TeacherAddQuestion() {
                                     </RadioGroup>
                                 </>
                             )}
+                            {numOptions !== "" && (
+                                <FormControl isRequired>
+                                    <FormLabel as="legend">Select the correct answer</FormLabel>
+                                    <RadioGroup value={correct} onChange={setCorrect}>
+                                        <HStack spacing="24px">
+                                            {Array.from({ length: parseInt(numOptions) }, (_, index) => (
+                                                <Radio key={index + 1} value={(index).toString()}>
+                                                    Option {index + 1}
+                                                </Radio>
+                                            ))}
+                                        </HStack>
+                                    </RadioGroup>
+                                </FormControl>
+                            )}
+
                         </FormControl>
-                        {numOptions !== "" && (
+                        {numOptions !== "" && correct != "" && (
                             <FormControl isRequired>
                                 <FormLabel>Options</FormLabel>
                                 {Array.from({ length: parseInt(numOptions, 10) }, (_, index) => (
@@ -115,20 +137,6 @@ export default function TeacherAddQuestion() {
                                 ))}
                             </FormControl>
                         )}
-                        {numOptions !== "" && (
-                            <FormControl isRequired>
-                                <FormLabel as="legend">Select the correct answer</FormLabel>
-                                <RadioGroup value={correct} onChange={setCorrect}>
-                                    <HStack spacing="24px">
-                                        {Array.from({ length: parseInt(numOptions) }, (_, index) => (
-                                            <Radio key={index + 1} value={(index + 1).toString()}>
-                                                Option {index + 1}
-                                            </Radio>
-                                        ))}
-                                    </HStack>
-                                </RadioGroup>
-                            </FormControl>
-                        )}
 
                         <Stack alignItems="center" justifyContent="center">
                             <Button variant="solid" width="50%" colorScheme="blue" onClick={addQuestion}>
@@ -138,7 +146,8 @@ export default function TeacherAddQuestion() {
                         <pre>{JSON.stringify(options, null, 2)}</pre>
                     </Stack>
                 </Stack>
-            </TeacherSidebar>
+            </TeacherSidebar></>)}
+
         </>
     );
 }
