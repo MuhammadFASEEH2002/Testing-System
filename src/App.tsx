@@ -10,6 +10,7 @@ import StudentLogout from "./screens/student/StudentLogout";
 import TeacherCreateTest from "./screens/teacher/TeacherCreateTest";
 import TeacherMyTests from "./screens/teacher/TeacherMyTests";
 import TeacherAddQuestion from "./screens/teacher/TeacherAddQuestion";
+import TeacherViewTest from "./screens/teacher/TeacherViewTest";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login/teacher/create-test" element={<TeacherCreateTest/>} />
           <Route path="/login/teacher/my-tests" element={<TeacherMyTests/>} />
           <Route path="/login/teacher/add-question/:id" element={<TeacherAddQuestion/>} />
+          <Route path="/login/teacher/view-test/:id" element={<TeacherViewTest/>} />
           <Route path="/login/teacher/logout" element={<TeacherLogout/>} />
           <Route path="/login/student/home" element={<StudentHome />}/>
           <Route path="/login/student/logout" element={<StudentLogout/>} />

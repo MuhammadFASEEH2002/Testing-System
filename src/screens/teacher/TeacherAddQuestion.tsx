@@ -40,7 +40,6 @@ export default function TeacherAddQuestion() {
     async function addQuestion() {
         try {
             setLoading(true);
-
             if (question && options.every(option => option.text.trim() !== '')) {
                 const response = await api.post('/api/add-question', { question, options, teacherToken, id });
                 if (response.data.status) {
@@ -86,67 +85,67 @@ export default function TeacherAddQuestion() {
     }
     return (
         <>
-            {loading ? (<><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack></>) : (<><TeacherSidebar>
-                <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
-                    <Stack width={"50%"}>
-                        <FormControl isRequired>
-                            <FormLabel>Question</FormLabel>
-                            <Input type="test" placeholder="Enter your question" onChange={(event) => handleInputChange(event, setQuestion)} />
-                        </FormControl>
-                        <FormControl isRequired>
-                            {numOptions === '' && (
-                                <>
-                                    <FormLabel as="legend">Select the number of options</FormLabel>
-                                    <RadioGroup value={numOptions} onChange={setNumOptions}>
-                                        <HStack spacing="24px">
-                                            <Radio value="2">2</Radio>
-                                            <Radio value="4">4</Radio>
-                                        </HStack>
-                                    </RadioGroup>
-                                </>
-                            )}
-                            {numOptions !== "" && (
+            <TeacherSidebar>
+                {loading ? (<><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack></>) : (<>
+                    <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
+                        <Stack width={"50%"}>
+                            <FormControl isRequired>
+                                <FormLabel>Question</FormLabel>
+                                <Input type="test" placeholder="Enter your question" onChange={(event) => handleInputChange(event, setQuestion)} />
+                            </FormControl>
+                            <FormControl isRequired>
+                                {numOptions === '' && (
+                                    <>
+                                        <FormLabel as="legend">Select the number of options</FormLabel>
+                                        <RadioGroup value={numOptions} onChange={setNumOptions}>
+                                            <HStack spacing="24px">
+                                                <Radio value="2">2</Radio>
+                                                <Radio value="4">4</Radio>
+                                            </HStack>
+                                        </RadioGroup>
+                                    </>
+                                )}
+                                {numOptions !== "" && (
+                                    <FormControl isRequired>
+                                        <FormLabel as="legend">Select the correct answer</FormLabel>
+                                        <RadioGroup value={correct} onChange={setCorrect}>
+                                            <HStack spacing="24px">
+                                                {Array.from({ length: parseInt(numOptions) }, (_, index) => (
+                                                    <Radio key={index + 1} value={(index).toString()}>
+                                                        Option {index + 1}
+                                                    </Radio>
+                                                ))}
+                                            </HStack>
+                                        </RadioGroup>
+                                    </FormControl>
+                                )}
+                            </FormControl>
+                            {numOptions !== "" && correct != "" && (
                                 <FormControl isRequired>
-                                    <FormLabel as="legend">Select the correct answer</FormLabel>
-                                    <RadioGroup value={correct} onChange={setCorrect}>
-                                        <HStack spacing="24px">
-                                            {Array.from({ length: parseInt(numOptions) }, (_, index) => (
-                                                <Radio key={index + 1} value={(index).toString()}>
-                                                    Option {index + 1}
-                                                </Radio>
-                                            ))}
+                                    <FormLabel>Options</FormLabel>
+                                    {Array.from({ length: parseInt(numOptions, 10) }, (_, index) => (
+                                        <HStack key={index}>
+                                            <Input
+                                                type="text"
+                                                placeholder={`Option ${index + 1}`}
+                                                onChange={(event: any) => handleOutputChange(event, index)}
+                                                margin="5px"
+                                                isRequired
+                                            />
                                         </HStack>
-                                    </RadioGroup>
+                                    ))}
                                 </FormControl>
                             )}
-
-                        </FormControl>
-                        {numOptions !== "" && correct != "" && (
-                            <FormControl isRequired>
-                                <FormLabel>Options</FormLabel>
-                                {Array.from({ length: parseInt(numOptions, 10) }, (_, index) => (
-                                    <HStack key={index}>
-                                        <Input
-                                            type="text"
-                                            placeholder={`Option ${index + 1}`}
-                                            onChange={(event: any) => handleOutputChange(event, index)}
-                                            margin="5px"
-                                            isRequired
-                                        />
-                                    </HStack>
-                                ))}
-                            </FormControl>
-                        )}
-
-                        <Stack alignItems="center" justifyContent="center">
-                            <Button variant="solid" width="50%" colorScheme="blue" onClick={addQuestion}>
-                                Add
-                            </Button>
+                            <Stack alignItems="center" justifyContent="center">
+                                <Button variant="solid" width="50%" colorScheme="blue" onClick={addQuestion}>
+                                    Add
+                                </Button>
+                            </Stack>
+                            <pre>{JSON.stringify(options, null, 2)}</pre>
                         </Stack>
-                        <pre>{JSON.stringify(options, null, 2)}</pre>
                     </Stack>
-                </Stack>
-            </TeacherSidebar></>)}
+                </>)}
+            </TeacherSidebar>
 
         </>
     );

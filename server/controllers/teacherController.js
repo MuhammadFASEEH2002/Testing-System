@@ -2,7 +2,8 @@ const Student = require("../models/Student.js");
 const Teacher = require("../models/Teacher.js");
 const Test = require("../models/Test.js");
 const Question = require("../models/Question.js")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { isQuestionOrPlusOrMinusToken } = require("typescript");
 
 exports.getTeacher = async (req, res) => {
     try {
@@ -123,3 +124,16 @@ exports.addQuestion = async (req, res) => {
 
 //     }
 // }
+exports.viewTest=async (req,res)=>{
+    try {
+        const question= await Question.find({test:req.body.id})
+        if(question){
+
+        }else{
+        res.json({ status: false, message: "no questions available" })
+
+        }
+    } catch (error) {
+        res.json({ status: false, message: error.message })
+    }
+}

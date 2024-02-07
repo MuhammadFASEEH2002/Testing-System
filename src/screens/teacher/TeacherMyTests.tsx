@@ -25,7 +25,6 @@ export default function TeacherMyTests() {
     const teacherToken = cookies.teacherToken
     useEffect(() => {
         getTest();
-        console.log(tests)
     }, []);
     async function getTest() {
         try {
@@ -88,7 +87,9 @@ export default function TeacherMyTests() {
                                 <CardFooter>
                                     <ButtonGroup spacing='2'>
                                         <Button variant='ghost' colorScheme='blue'>
+                                            <Link to={`/login/teacher/view-test/${tests._id}`}>
                                             View Test
+                                            </Link>
                                         </Button>
 
                                         <Button variant='solid' colorScheme='blue'>

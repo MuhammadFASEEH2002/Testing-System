@@ -51,14 +51,13 @@ const teacherToken=cookies.teacherToken
   }
 
   useEffect(() => {
-    // Effect function
     getTeacher();
   }, []);
   return (
     <>
       <TeacherSidebar>
         {loading ? (<>
-          <Text>{teacher?.firstName}</Text>
+          <Text fontSize={"2xl"}>Welcome  {teacher?.firstName} {teacher?.lastName}</Text>
         </>) : (
           <><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack> </>)}
       </TeacherSidebar>
