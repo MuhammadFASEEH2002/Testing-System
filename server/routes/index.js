@@ -11,10 +11,15 @@ router.post('/login', authController.login)
 router.post('/get-teacher', verifyTeacherToken , teacherController.getTeacher)
 router.post('/create-test', verifyTeacherToken , teacherController.createTest)
 router.post('/get-test', verifyTeacherToken , teacherController.getTests)
+router.post('/add-question', verifyTeacherToken , teacherController.addQuestion)
+
 
 
 
 // student routes
+router.get('/get-full-test', teacherController.getTests)
+
+
 
 
 module.exports = router;

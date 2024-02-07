@@ -3,7 +3,7 @@ import TeacherSidebar from '../../components/TeacherSidebar'
 import { useEffect, useState } from 'react';
 import { Text, useToast, Stack, HStack, Heading, Card, CardBody, Divider, CardFooter, Button, ButtonGroup, Spinner } from '@chakra-ui/react';
 import api from '../../utils/api';
-import { useNavigate } from 'react-router';
+import { useNavigate} from 'react-router';
 import { Link } from 'react-router-dom';
 
 export default function TeacherMyTests() {
@@ -19,6 +19,7 @@ export default function TeacherMyTests() {
     const [cookies] = useCookies();
     const [tests, setTests] = useState<Test[]>([]);
     const [loading, setLoading] = useState(false);
+    
     const toast = useToast();
     const navigate = useNavigate();
     const teacherToken = cookies.teacherToken
