@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const authController  = require('../controllers/authController.js')
 const teacherController  = require('../controllers/teacherController.js')
-// const studentController  = require('../controllers/studentController.js')
+const studentController  = require('../controllers/studentController.js')
 const verifyTeacherToken = require('../middlewares/authMiddleware.js')
 
 // auth routes
