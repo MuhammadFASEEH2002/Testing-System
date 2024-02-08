@@ -117,21 +117,33 @@ exports.addQuestion = async (req, res) => {
 //             //     res.json({ status: false, message: "no test available" })
 
 //             // }
-        
+
 //     } catch (error) {
 //         res.json({ status: false, message: error.message })
 
 //     }
 // }
-exports.viewTest=async (req,res)=>{
+exports.viewTest = async (req, res) => {
     try {
-        const question= await Question.find({test:req.body.id})
-        if(question){
+        const question = await Question.find({ test: req.body.id })
+        if (question) {
+            console.log(question)
+            res.json({ status: true, message: "test found", question })
 
-        }else{
-        res.json({ status: false, message: "no questions available" })
+        } else {
+            res.json({ status: false, message: "no questions available" })
 
         }
+    } catch (error) {
+        res.json({ status: false, message: error.message })
+    }
+}
+exports.deleteQuestion = async (req, res) => {
+    try {
+        await Question.findByIdAndDelete({ _id: req.body.id })
+        res.json({ status: true, message: "Question Deleted" })
+
+
     } catch (error) {
         res.json({ status: false, message: error.message })
     }
