@@ -1,8 +1,11 @@
 import { FormControl, FormLabel, HStack, Button, Stack, useColorModeValue, useToast,List, ListItem, ListIcon } from '@chakra-ui/react';
 // import { useState } from 'react'
 import { MdDelete, MdCheckCircle } from "react-icons/md";
+import { IoMdCloseCircle } from "react-icons/io";
 import api from '../utils/api';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router';
+
 type Question = {
     _id: Object,
     test: Test,
@@ -21,8 +24,8 @@ type Test = {
 export default function TeacherQuestion({ question }: { question: Question }) {
     const [cookies] = useCookies();
     const teacherToken = cookies.teacherToken;
-    // const [correct, setCorrect] = useState("");
-    const toast = useToast()
+    const toast = useToast();
+    const navigate=useNavigate()
     async function deleteQuestion(id: any) {
         try {
             const response = await api.post('/api/delete-question', { teacherToken, id });
@@ -34,7 +37,7 @@ export default function TeacherQuestion({ question }: { question: Question }) {
                     duration: 5000,
                     isClosable: true
                 });
-                // navigate("/login/teacher/my-tests")
+                navigate(`/login/teacher/my-tests`)
 
             } else {
                 toast({
@@ -72,11 +75,10 @@ export default function TeacherQuestion({ question }: { question: Question }) {
                     // </RadioGroup>
                         <List spacing={3}>
                             <ListItem>
-                                <ListIcon as={MdCheckCircle} color='green.500' />
+                            {/* @ts-ignore */}
+                                <ListIcon as={option.isCorrect? MdCheckCircle: IoMdCloseCircle} color={option.isCorrect? "green.500": "red.500" } />
                             {/* @ts-ignore */}
                                 {option.text} 
-                            {/* @ts-ignore */}
-                                {option.isCorrect?(<>correct</>):(<>not correct</>)}
                             </ListItem>
                            
                             </List>

@@ -65,7 +65,7 @@ export default function TeacherMyTests() {
 
             <TeacherSidebar>
                 {loading ? (
-                    <><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack> </>
+                    <><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack> </>
                 ) : (
                     <HStack alignItems={"center"} justifyContent={"center"} flexWrap={"wrap"} spacing='2'>
                         {tests.map(tests => (

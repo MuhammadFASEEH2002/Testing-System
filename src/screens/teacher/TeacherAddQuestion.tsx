@@ -86,7 +86,7 @@ export default function TeacherAddQuestion() {
     return (
         <>
             <TeacherSidebar>
-                {loading ? (<><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack></>) : (<>
+                {loading ? (<><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack></>) : (<>
                     <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
                         <Stack width={"50%"}>
                             <FormControl isRequired>

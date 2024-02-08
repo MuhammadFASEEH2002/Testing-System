@@ -16,14 +16,14 @@ export default function TeacherHome() {
   const [cookies] = useCookies();
   const toast = useToast()
   const navigate = useNavigate()
-const teacherToken=cookies.teacherToken
+  const teacherToken = cookies.teacherToken
   async function getTeacher() {
     try {
       setLoading(false);
-      const response = await api.post('/api/get-teacher',{teacherToken})
+      const response = await api.post('/api/get-teacher', { teacherToken })
       if (response.data.status) {
         setTeacher(response.data.teacher)
-      setLoading(true);
+        setLoading(true);
 
       } else {
         toast({
@@ -44,10 +44,10 @@ const teacherToken=cookies.teacherToken
         position: "top",
         duration: 5000,
         isClosable: true
-    })
-    navigate('/')
+      })
+      navigate('/')
     }
-  
+
   }
 
   useEffect(() => {
@@ -57,9 +57,11 @@ const teacherToken=cookies.teacherToken
     <>
       <TeacherSidebar>
         {loading ? (<>
-          <Text fontSize={"2xl"}>Welcome  {teacher?.firstName} {teacher?.lastName}</Text>
+          <Stack width={'100%'} alignItems={"center"} justifyContent={"center"}>
+            <Text fontSize={"2xl"} textAlign={"center"}>Welcome  {teacher?.firstName} {teacher?.lastName}</Text>
+          </Stack>
         </>) : (
-          <><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack> </>)}
+          <><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"}><Spinner size='xl' /></Stack> </>)}
       </TeacherSidebar>
     </>
   )

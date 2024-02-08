@@ -108,7 +108,7 @@ export default function LoginScreen() {
     }
     return (
         <>
-            {loading ? (<><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack> </>) : (<>
+            {loading ? (<><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack> </>) : (<>
                 <Flex
                     minH={'100vh'}
                     align={'center'}

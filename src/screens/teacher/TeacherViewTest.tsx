@@ -31,14 +31,6 @@ export default function TeacherViewTest() {
         try {
             const response = await api.post('/api/view-test', { teacherToken, id });
             if (response.data.status) {
-                // toast({
-                //     title: "Question Created",
-                //     status: "success",
-                //     position: "top",
-                //     duration: 5000,
-                //     isClosable: true
-                // });
-                // navigate("/login/teacher/my-tests")
                 setQuestion(response.data.question)
             } else {
                 toast({

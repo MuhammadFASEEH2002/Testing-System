@@ -83,7 +83,7 @@ export default function TeacherCreateTest() {
     }
     return (<>
         <TeacherSidebar>
-            {loading ? (<><Stack minHeight={'100vh'} width={'100vw'} ><Spinner size='xl' /></Stack> </>) : (<>
+            {loading ? (<><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack> </>) : (<>
                 <Flex
                     align={'center'}
                     justify={'center'}
