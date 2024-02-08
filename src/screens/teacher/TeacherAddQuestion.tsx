@@ -141,7 +141,7 @@ export default function TeacherAddQuestion() {
                                     Add
                                 </Button>
                             </Stack>
-                            <pre>{JSON.stringify(options, null, 2)}</pre>
+                            {/* <pre>{JSON.stringify(options, null, 2)}</pre> */}
                         </Stack>
                     </Stack>
                 </>)}
