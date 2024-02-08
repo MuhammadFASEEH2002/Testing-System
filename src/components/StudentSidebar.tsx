@@ -167,7 +167,7 @@ export default function StudentSidebar({ children }: StudentSidebarProps) {
       navigate('/login')
 
     } else {
-      console.log(token)
+      // console.log(token)
     }
 
   }

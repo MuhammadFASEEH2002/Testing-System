@@ -19,7 +19,8 @@ router.post('/delete-question', verifyTeacherToken , teacherController.deleteQue
 
 
 // student routes
-// router.get('/get-full-test', teacherController.getTests)
+router.post('/get-student', verifyStudentToken , studentController.getStudent)
+
 
 
 
