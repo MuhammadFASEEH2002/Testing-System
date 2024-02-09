@@ -6,7 +6,6 @@ import {
   HStack,
   Icon,
   useColorModeValue,
-  Text,
   Drawer,
   DrawerContent,
   useDisclosure,
@@ -138,13 +137,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         icon={<FiMenu />}
       />
 
-      <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold">
-        Logo
-      </Text>
+<SiTestcafe size={30} />
+
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <Flex alignItems={'center'}>
