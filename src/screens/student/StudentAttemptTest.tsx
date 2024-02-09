@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import api from "../../utils/api";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
-Link
+
 
 export default function StudentAttemptTest() {
     type Test = {
@@ -17,6 +17,8 @@ export default function StudentAttemptTest() {
         firstName: string
     }
     const [test, setTest] = useState<Test>();
+    const [testAvailable, setTestAvailable] = useState(false);
+    const [questionCount, setQuestionCount] = useState("");
 
     const [loading, setLoading] = useState(false);
     const [testid, setTestid] = useState(false);
@@ -41,6 +43,8 @@ export default function StudentAttemptTest() {
                     })
                     setTest(response.data.test)
                     setLoading(false);
+                    setTestAvailable(true);
+                    setQuestionCount(response.data.questionCount)
 
                 } else {
                     toast({
@@ -52,6 +56,8 @@ export default function StudentAttemptTest() {
                         isClosable: true
                     })
                     setLoading(false);
+                    setTestAvailable(false);
+
                 }
             } else {
                 toast({
@@ -62,6 +68,8 @@ export default function StudentAttemptTest() {
                     isClosable: true
                 })
                 setLoading(false);
+                setTestAvailable(false);
+
             }
         } catch (error) {
             toast({
@@ -72,6 +80,8 @@ export default function StudentAttemptTest() {
                 isClosable: true
             })
             setLoading(false);
+            setTestAvailable(false);
+
 
         }
     }
@@ -83,17 +93,9 @@ export default function StudentAttemptTest() {
             <StudentSidebar>
                 {loading ? (<><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack></>) : (<>
                     <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
-                        <Stack width={"50%"}>
-                            <FormLabel>Enter Test ID</FormLabel>
-                            <HStack>
-                                <Input placeholder="Enter your test id" onChange={(event) => handleInputChange(event, setTestid)}></Input>
-                                <Button bgColor={"blue.400"} onClick={() => { searchTest() }}>Search</Button>
-                            </HStack>
-                        </Stack>
-                        <Card maxW='sm'>
-                            <Button variant='solid' colorScheme='pink'>
-                                Delete
-                            </Button>
+                   
+                        {testAvailable?(<>
+                            <Card maxW='sm'>
                             <CardBody textAlign={"center"}>
 
                                 <Stack mt='6' spacing='3'>
@@ -101,25 +103,31 @@ export default function StudentAttemptTest() {
                                     <Text color='blue.600' >
                                         Test ID: {test?.testId}
                                     </Text>
+                                    <Text color='blue.600' >
+                                        Number of Questions: {questionCount}
+                                    </Text>
                                 </Stack>
                             </CardBody>
                             <Divider />
-                            <CardFooter>
-                                <ButtonGroup spacing='2'>
-                                    {/* <Button variant='ghost' colorScheme='blue'>
-                                            <Link to={`/login/teacher/view-test/${tests._id}`}>
-                                            View Test
-                                            </Link>
-                                        </Button>
+                            <CardFooter alignItems={"center"} justifyContent={"center"}>
+                                <ButtonGroup >
 
-                                        <Button variant='solid' colorScheme='blue'>
-                                            <Link to={`/login/teacher/add-question/${tests._id}`}>
-                                            Add Question
-                                            </Link>
-                                        </Button> */}
+
+                                    <Button variant='solid' colorScheme='blue'>
+                                        <Link to={`/login/student/attempt-test-view/${test?._id}`}> 
+                                            Attempt
+                                        </Link>
+                                    </Button>
                                 </ButtonGroup>
                             </CardFooter>
-                        </Card>
+                        </Card></>):(<>
+                            <Stack width={"50%"}>
+                            <FormLabel>Enter Test ID</FormLabel>
+                            <HStack>
+                                <Input placeholder="Enter your test id" onChange={(event) => handleInputChange(event, setTestid)}></Input>
+                                <Button bgColor={"blue.400"} onClick={() => { searchTest() }}>Search</Button>
+                            </HStack>
+                        </Stack></>)}
                     </Stack>
                 </>)}
             </StudentSidebar>

@@ -23,16 +23,36 @@ exports.searchTest = async (req, res) => {
     try {
         const test = await Test.findOne({ testId: req.body.testid })
 
-        // const student = await Student.findOne({ _id: req.user })
         if (test) {
+            const questionCount= await Question.countDocuments({test: test._id})
             res.json({
                 message: "test found",
                 status: true,
-                test
+                test,questionCount
+                
             });
+        }else{
+            res.json({ status: false, message: "test not found" })
+
         }
     } catch (error) {
         res.json({ status: false, message: error.message })
 
+    }
+}
+
+exports.viewTest = async (req, res) => {
+    try {
+        const question = await Question.find({ test: req.body.id })
+        if (question) {
+            console.log(question)
+            res.json({ status: true, message: "test found", question })
+
+        } else {
+            res.json({ status: false, message: "no questions available" })
+
+        }
+    } catch (error) {
+        res.json({ status: false, message: error.message })
     }
 }

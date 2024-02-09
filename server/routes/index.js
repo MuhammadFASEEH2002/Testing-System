@@ -22,6 +22,8 @@ router.post('/delete-question', verifyToken , teacherController.deleteQuestion)
 // student routes
 router.post('/get-student', verifyToken , studentController.getStudent)
 router.post('/search-test', verifyToken , studentController.searchTest)
+router.post('/attempt-test-view', verifyToken , studentController.viewTest)
+
 
 
 

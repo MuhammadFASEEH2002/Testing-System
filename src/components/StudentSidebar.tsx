@@ -17,8 +17,8 @@ import {
   FiHome,
   FiSettings,
   FiMenu,
-  FiTrendingUp
 } from 'react-icons/fi'
+import { LuPencilLine } from "react-icons/lu";
 import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
 interface LinkItemProps {
@@ -42,7 +42,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, link: "/login/student/home" },
-  { name: 'Attempt Test', icon: FiTrendingUp, link:"/login/student/attempt-test"},
+  { name: 'Attempt Test', icon: LuPencilLine, link:"/login/student/attempt-test"},
   // { name: 'Total Test', icon: FiCompass },
   // { name: 'Results', icon: FiStar },
   { name: 'Logout', icon: FiSettings, link: "/login/student/logout" },
