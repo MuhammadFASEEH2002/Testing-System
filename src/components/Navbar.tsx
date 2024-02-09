@@ -9,13 +9,13 @@ import {
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useColorMode
 } from '@chakra-ui/react'
 import {
   ChevronRightIcon,
 } from '@chakra-ui/icons'
 import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
+import { SiTestcafe } from "react-icons/si";
 
 export default function Navbar() {
   // const { isOpen, onToggle } = useDisclosure()
@@ -39,12 +39,8 @@ export default function Navbar() {
           display={{ base: 'flex', md: 'none' }}>
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')} as='i' fontSize='3xl'>
-            Testify
-          </Text>
+
+        <SiTestcafe size={30} />
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />

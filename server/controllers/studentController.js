@@ -19,3 +19,20 @@ exports.getStudent = async (req, res) => {
 
     }
 }
+exports.searchTest = async (req, res) => {
+    try {
+        const test = await Test.findOne({ testId: req.body.testid })
+
+        // const student = await Student.findOne({ _id: req.user })
+        if (test) {
+            res.json({
+                message: "test found",
+                status: true,
+                test
+            });
+        }
+    } catch (error) {
+        res.json({ status: false, message: error.message })
+
+    }
+}

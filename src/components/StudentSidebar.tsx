@@ -15,11 +15,9 @@ import {
 } from '@chakra-ui/react'
 import {
   FiHome,
-  // FiTrendingUp,
-  // FiCompass,
-  // FiStar,
   FiSettings,
   FiMenu,
+  FiTrendingUp
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
@@ -44,7 +42,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, link: "/login/student/home" },
-  // { name: 'Create Test', icon: FiTrendingUp },
+  { name: 'Attempt Test', icon: FiTrendingUp, link:"/login/student/attempt-test"},
   // { name: 'Total Test', icon: FiCompass },
   // { name: 'Results', icon: FiStar },
   { name: 'Logout', icon: FiSettings, link: "/login/student/logout" },
@@ -52,6 +50,7 @@ const LinkItems: Array<LinkItemProps> = [
 import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
+import { SiTestcafe } from "react-icons/si";
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
@@ -65,9 +64,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       h="full"
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+            <SiTestcafe size={30} />
+
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
