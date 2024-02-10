@@ -11,6 +11,7 @@ export default function TeacherMyTests() {
         _id: Object,
         testId: string,
         testName: string,
+        isActive: boolean,
         teacher: Teacher
     };
     type Teacher = {
@@ -43,7 +44,6 @@ export default function TeacherMyTests() {
                     isClosable: true
                 })
                 navigate('/login/teacher/home')
-    
             }
         } catch (error) {
             toast({
@@ -55,9 +55,80 @@ export default function TeacherMyTests() {
             })
             navigate('/')
 
-        }
-       
+        }   
     }
+    async function startTest(id:any) {
+        try {
+            const response = await api.post('/api/start-test', { teacherToken , id})
+            if (response.data.status) {
+                toast({
+                    title: "Test Started",
+                    status: "success",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true
+                })
+                getTest()
+            } else {
+                toast({
+                    title: "Error",
+                    description: response.data.message,
+                    status: "error",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true
+                })
+              
+            }
+        } catch (error) {
+            toast({
+                title: "Network Error",
+                status: "error",
+                position: "top",
+                duration: 5000,
+                isClosable: true
+            })
+            navigate('/')
+
+        }   
+    }
+    async function stopTest(id:any) {
+        try {
+            const response = await api.post('/api/stop-test', { teacherToken , id})
+            if (response.data.status) {
+                toast({
+                    title: "Test Stopped",
+                    status: "success",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true
+                })
+                getTest()
+
+            } else {
+                toast({
+                    title: "Error",
+                    description: response.data.message,
+                    status: "error",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true
+                })
+              
+            }
+        } catch (error) {
+            toast({
+                title: "Network Error",
+                status: "error",
+                position: "top",
+                duration: 5000,
+                isClosable: true
+            })
+            navigate('/')
+
+        }   
+    }
+
 
 
     return (
@@ -74,8 +145,14 @@ export default function TeacherMyTests() {
                                 <Button variant='solid' colorScheme='pink'>
                                     Delete
                                 </Button>
-                                <CardBody textAlign={"center"}>
+                                <CardBody textAlign={"center"}> 
+                                {tests?.isActive?(<>
+                                    <Button bgColor={"red.400"} onClick={()=>{stopTest(tests._id)}}>Stop</Button>
 
+                                </>):(<>
+
+<Button bgColor={"blue.400"} onClick={()=>{startTest(tests._id)}}>Start</Button>
+                                </>)}
                                     <Stack mt='6' spacing='3'>
                                         <Heading size='md' fontSize='2xl'>{tests.testName}</Heading>
                                         <Text color='blue.600' >
@@ -86,6 +163,11 @@ export default function TeacherMyTests() {
                                 <Divider />
                                 <CardFooter>
                                     <ButtonGroup spacing='2'>
+                                        {tests?.isActive?(<>
+
+                                        </>):(
+                                            <>
+
                                         <Button variant='ghost' colorScheme='blue'>
                                             <Link to={`/login/teacher/view-test/${tests._id}`}>
                                             View Test
@@ -97,6 +179,8 @@ export default function TeacherMyTests() {
                                             Add Question
                                             </Link>
                                         </Button>
+                                            </>
+                                        )}
                                     </ButtonGroup>
                                 </CardFooter>
                             </Card>

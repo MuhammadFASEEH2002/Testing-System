@@ -132,9 +132,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
-<SiTestcafe size={30} />
-
+<Box display={{ base: 'flex', md: 'none' }}>
+<SiTestcafe size={30}/>
+</Box>
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <Flex alignItems={'center'}>

@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/icons'
 import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
 import { SiTestcafe } from "react-icons/si";
+import { IoSunnyOutline } from "react-icons/io5";
 
 export default function Navbar() {
   // const { isOpen, onToggle } = useDisclosure()
@@ -54,7 +55,7 @@ export default function Navbar() {
           spacing={6}>
 
           <Button onClick={toggleColorMode} size={{ base: 'md', md: 'md', lg: 'md' }}>
-            {colorMode === 'light' ? <MdDarkMode /> : <MdOutlineDarkMode />}
+            {colorMode === 'light' ? <MdDarkMode /> : <IoSunnyOutline />}
           </Button>
         </Stack>
       </Flex>

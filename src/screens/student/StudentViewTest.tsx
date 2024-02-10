@@ -2,9 +2,8 @@ import { useParams } from "react-router"
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../utils/api";
-import { useToast, Stack} from "@chakra-ui/react";
+import { useToast, Stack, Button } from "@chakra-ui/react";
 import StudentQuestion from "../../components/StudentQuestion";
-import StudentSidebar from "../../components/StudentSidebar";
 
 export default function StudentViewTest() {
     type Question = {
@@ -52,13 +51,13 @@ export default function StudentViewTest() {
     }, []);
     return (
         <>
-            <StudentSidebar>
+         
+                <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
                 {question.map(question => (
 
                     <>
-                        <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
-                            <Stack width={"50%"}>
-                               
+                            <Stack  width={{ base: "90%", md: "70%", lg: "50%" }}>
+
                                 {/* <RadioGroup value={numOptions} onChange={setNumOptions}>
                                     <VStack spacing="24px">
                                         <Radio value="2">2</Radio>
@@ -67,12 +66,13 @@ export default function StudentViewTest() {
                                 </RadioGroup> */}
                                 return <StudentQuestion question={question} />
                             </Stack>
-                        </Stack>
+
                     </>
                 ))
-
-                }
-            </StudentSidebar>
+                
+            }
+            <Button bgColor={"blue.400"}>End Test</Button>
+            </Stack>
         </>
     )
 }

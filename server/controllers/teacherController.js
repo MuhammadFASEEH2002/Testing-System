@@ -74,6 +74,23 @@ exports.getTests = async (req, res) => {
 
     }
 }
+exports.startTest = async (req, res) => {
+    try {
+        await Test.findByIdAndUpdate({ _id: req.body.id},{isActive:true})
+        res.json({ status: true, message: "test started"})
+    } catch (error) {
+        res.json({ status: false, message: error.message })
+
+    }
+}
+exports.stopTest = async (req, res) => {
+    try {
+        await Test.findByIdAndUpdate({ _id: req.body.id},{isActive:false})
+        res.json({ status: true, message: "test stopped"})
+    } catch (error) {
+        res.json({ status: false, message: error.message })
+    }
+}
 exports.addQuestion = async (req, res) => {
     try {
         // const teacher = await Teacher.findOne({ _id: req.user })
@@ -92,37 +109,15 @@ exports.addQuestion = async (req, res) => {
                 message: "Test Created",
                 status: true,
             });
-
         } else {
             res.json({ status: false, message: "invalid test" })
-
         }
     } catch (error) {
         res.json({ status: false, message: error.message })
-
     }
 }
 
 
-// exports.getTests = async (req, res) => {
-//     try {
-//         // const teacher = await Teacher.findOne({ _id: req.user })
-//         // if (teacher) {
-//             const question = await Question.find().populate(
-//                 "test"
-//             )
-//             // if (test) {
-//                 res.json({ status: true, message: "test found", question })
-//             // } else {
-//             //     res.json({ status: false, message: "no test available" })
-
-//             // }
-
-//     } catch (error) {
-//         res.json({ status: false, message: error.message })
-
-//     }
-// }
 exports.viewTest = async (req, res) => {
     try {
         const question = await Question.find({ test: req.body.id })

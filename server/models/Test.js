@@ -8,7 +8,7 @@ const TestSchema = new mongoose.Schema({
     },
     testId: { type: String, required: true, unique: true },
     testName: { type: String, required: true },
-   
+    isActive: { type: Boolean, required: true }
 });
 
 const Test = mongoose.model("test", TestSchema);

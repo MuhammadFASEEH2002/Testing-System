@@ -11,7 +11,8 @@ export default function StudentAttemptTest() {
         _id: Object,
         testId: string,
         testName: string,
-        teacher: Teacher
+        isActive: boolean,
+        teacher: Teacher,
     };
     type Teacher = {
         firstName: string
@@ -93,41 +94,44 @@ export default function StudentAttemptTest() {
             <StudentSidebar>
                 {loading ? (<><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack></>) : (<>
                     <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
-                   
-                        {testAvailable?(<>
+
+                        {testAvailable ? (<>
                             <Card maxW='sm'>
-                            <CardBody textAlign={"center"}>
+                                <CardBody textAlign={"center"}>
 
-                                <Stack mt='6' spacing='3'>
-                                    <Heading size='md' fontSize='2xl'>{test?.testName}</Heading>
-                                    <Text color='blue.600' >
-                                        Test ID: {test?.testId}
-                                    </Text>
-                                    <Text color='blue.600' >
-                                        Number of Questions: {questionCount}
-                                    </Text>
-                                </Stack>
-                            </CardBody>
-                            <Divider />
-                            <CardFooter alignItems={"center"} justifyContent={"center"}>
-                                <ButtonGroup >
+                                    <Stack mt='6' spacing='3'>
+                                        <Heading size='md' fontSize='2xl'>{test?.testName}</Heading>
+                                        <Text color='blue.600' >
+                                            Test ID: {test?.testId}
+                                        </Text>
+                                        <Text color='blue.600' >
+                                            Number of Questions: {questionCount}
+                                        </Text>
+                                    </Stack>
+                                </CardBody>
+                                <Divider />
+                                <CardFooter alignItems={"center"} justifyContent={"center"}>
+                                    <ButtonGroup >
 
 
-                                    <Button variant='solid' colorScheme='blue'>
-                                        <Link to={`/login/student/attempt-test-view/${test?._id}`}> 
-                                            Attempt
-                                        </Link>
-                                    </Button>
-                                </ButtonGroup>
-                            </CardFooter>
-                        </Card></>):(<>
-                            <Stack width={"50%"}>
-                            <FormLabel>Enter Test ID</FormLabel>
-                            <HStack>
-                                <Input placeholder="Enter your test id" onChange={(event) => handleInputChange(event, setTestid)}></Input>
-                                <Button bgColor={"blue.400"} onClick={() => { searchTest() }}>Search</Button>
-                            </HStack>
-                        </Stack></>)}
+                                        {test?.isActive ? (<>
+                                            <Button variant='solid' colorScheme='blue'>
+                                                <Link to={`/login/student/attempt-test-view/${test?._id}`}>
+                                                    Attempt
+                                                </Link>
+                                            </Button>
+                                        </>) : (<></>)}
+
+                                    </ButtonGroup>
+                                </CardFooter>
+                            </Card></>) : (<>
+                                <Stack width={"50%"}>
+                                    <FormLabel>Enter Test ID</FormLabel>
+                                    <HStack>
+                                        <Input placeholder="Enter your test id" onChange={(event) => handleInputChange(event, setTestid)}></Input>
+                                        <Button bgColor={"blue.400"} onClick={() => { searchTest() }}>Search</Button>
+                                    </HStack>
+                                </Stack></>)}
                     </Stack>
                 </>)}
             </StudentSidebar>
