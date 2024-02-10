@@ -28,7 +28,7 @@ export default function TeacherQuestion({ question }: { question: Question }) {
     // const [cookies] = useCookies();
     const [correct, setCorrect] = useState();
     const [isSubmitted, setIsSubmitted] = useState(false);
-    setIsSubmitted(false)
+    // setIsSubmitted(false)
     const [cookies] = useCookies();
     const studentToken = cookies.studentToken;
     // const teacherToken = cookies.teacherToken;
@@ -36,6 +36,7 @@ export default function TeacherQuestion({ question }: { question: Question }) {
     // const navigate=useNavigate()
     async function submitQuestion(option: any, testId: any, question: any) {
         try {
+    setIsSubmitted(false)
             if (correct) {
                 const response = await api.post('/api/result', { studentToken, option, testId, question });
                 if (response.data.status) {
