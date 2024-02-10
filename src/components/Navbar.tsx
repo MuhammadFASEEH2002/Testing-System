@@ -14,7 +14,7 @@ import {
 import {
   ChevronRightIcon,
 } from '@chakra-ui/icons'
-import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
+import { MdDarkMode} from "react-icons/md";
 import { SiTestcafe } from "react-icons/si";
 import { IoSunnyOutline } from "react-icons/io5";
 
