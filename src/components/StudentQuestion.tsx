@@ -28,18 +28,18 @@ export default function TeacherQuestion({ question }: { question: Question }) {
     // const [cookies] = useCookies();
     const [correct, setCorrect] = useState();
     const [isSubmitted, setIsSubmitted] = useState(false);
-
+    setIsSubmitted(false)
     const [cookies] = useCookies();
     const studentToken = cookies.studentToken;
     // const teacherToken = cookies.teacherToken;
     const toast = useToast();
     // const navigate=useNavigate()
-    async function submitQuestion(option:any,testId:any,question:any) {
+    async function submitQuestion(option: any, testId: any, question: any) {
         try {
-            if(correct){
-                const response = await api.post('/api/result', { studentToken, option,testId,question });
+            if (correct) {
+                const response = await api.post('/api/result', { studentToken, option, testId, question });
                 if (response.data.status) {
-                  
+
                 } else {
                     toast({
                         title: "Auth Error",
@@ -52,7 +52,7 @@ export default function TeacherQuestion({ question }: { question: Question }) {
                     // setLoading(false);
                 }
             }
-            // setIsSubmitted(true)
+
         } catch (error) {
 
         }
@@ -105,9 +105,9 @@ export default function TeacherQuestion({ question }: { question: Question }) {
                         </RadioGroup>
                     </>
                     ))}
-                                {/* @ts-ignore */}
+                    {/* @ts-ignore */}
 
-                    <Button onClick={() => { submitQuestion(correct, question.test,question.question) }}>Submit</Button>
+                    <Button onClick={() => { submitQuestion(correct, question.test, question.question) }}>Submit</Button>
 
                 </Stack>
             </>)}
