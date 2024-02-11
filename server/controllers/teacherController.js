@@ -93,9 +93,7 @@ exports.stopTest = async (req, res) => {
 }
 exports.addQuestion = async (req, res) => {
     try {
-        // const teacher = await Teacher.findOne({ _id: req.user })
         const test = await Test.findOne({ _id: req.body.id })
-        // console.log(test)
         if (test) {
             const question = await Question.create({
                 test: test._id,
@@ -117,17 +115,14 @@ exports.addQuestion = async (req, res) => {
     }
 }
 
-
 exports.viewTest = async (req, res) => {
     try {
         const question = await Question.find({ test: req.body.id })
         if (question) {
             console.log(question)
             res.json({ status: true, message: "test found", question })
-
         } else {
             res.json({ status: false, message: "no questions available" })
-
         }
     } catch (error) {
         res.json({ status: false, message: error.message })

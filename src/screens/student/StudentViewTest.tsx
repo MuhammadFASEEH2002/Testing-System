@@ -1,10 +1,9 @@
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../utils/api";
-import { useToast, Stack, Button } from "@chakra-ui/react";
+import { useToast, Stack, Button, Spinner } from "@chakra-ui/react";
 import StudentQuestion from "../../components/StudentQuestion";
-
 export default function StudentViewTest() {
     type Question = {
         _id: Object,
@@ -23,14 +22,18 @@ export default function StudentViewTest() {
     const [cookies] = useCookies();
     const studentToken = cookies.studentToken;
     const [question, setQuestion] = useState<Question[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const { id } = useParams<{ id: string }>();
     const toast = useToast()
+    const navigate = useNavigate()
     async function viewTest() {
         try {
+            setLoading(true)
             const response = await api.post('/api/attempt-test-view', { studentToken, id });
             if (response.data.status) {
                 setQuestion(response.data.question)
+                setLoading(false)
             } else {
                 toast({
                     title: "Auth Error",
@@ -40,9 +43,17 @@ export default function StudentViewTest() {
                     duration: 5000,
                     isClosable: true
                 });
-                // setLoading(false);
+                navigate("/login/student/attempt-test")
             }
         } catch (error) {
+            toast({
+                title: "Network Error",
+                status: "error",
+                position: "top",
+                duration: 5000,
+                isClosable: true
+            })
+            navigate("/login/student/attempt-test")
 
         }
     }
@@ -51,28 +62,19 @@ export default function StudentViewTest() {
     }, []);
     return (
         <>
-         
+            {loading ? (<><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack></>) : (<>
                 <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
-                {question.map(question => (
-
-                    <>
-                            <Stack  width={{ base: "90%", md: "70%", lg: "50%" }}>
-
-                                {/* <RadioGroup value={numOptions} onChange={setNumOptions}>
-                                    <VStack spacing="24px">
-                                        <Radio value="2">2</Radio>
-                                        <Radio value="4">4</Radio>
-                                    </VStack>
-                                </RadioGroup> */}
+                    {question.map(question => (
+                        <>
+                            <Stack width={{ base: "90%", md: "70%", lg: "50%" }}>
                                 return <StudentQuestion question={question} />
                             </Stack>
+                        </>
+                    ))
+                    }
+                    <Button bgColor={"blue.400"} _hover={{ bgColor: "blue.500" }} onClick={() => { navigate("/login/student/attempt-test") }}>End Test</Button>
+                </Stack></>)}
 
-                    </>
-                ))
-                
-            }
-            <Button bgColor={"blue.400"}>End Test</Button>
-            </Stack>
         </>
     )
 }

@@ -46,7 +46,6 @@ export default function StudentAttemptTest() {
                     setLoading(false);
                     setTestAvailable(true);
                     setQuestionCount(response.data.questionCount)
-
                 } else {
                     toast({
                         title: "Test Not Found",
@@ -58,7 +57,6 @@ export default function StudentAttemptTest() {
                     })
                     setLoading(false);
                     setTestAvailable(false);
-
                 }
             } else {
                 toast({
@@ -70,7 +68,6 @@ export default function StudentAttemptTest() {
                 })
                 setLoading(false);
                 setTestAvailable(false);
-
             }
         } catch (error) {
             toast({
@@ -82,12 +79,10 @@ export default function StudentAttemptTest() {
             })
             setLoading(false);
             setTestAvailable(false);
-
-
         }
     }
     useEffect(() => {
-        // Effect function
+        
     }, []);
     return (
         <>
@@ -121,7 +116,6 @@ export default function StudentAttemptTest() {
                                                 </Link>
                                             </Button>
                                         </>) : (<></>)}
-
                                     </ButtonGroup>
                                 </CardFooter>
                             </Card></>) : (<>

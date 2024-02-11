@@ -11,6 +11,15 @@ const TestResultSchema = new mongoose.Schema({
         required: true,
         ref: 'test'
     },
+    student:{
+        type:String,
+        required: true,
+        ref:'student'
+    },
+    totalQuestions:{
+        type:String,
+        required: true
+    },
     attemptedQuestions: [
         {
             question: String,

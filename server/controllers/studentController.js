@@ -34,7 +34,6 @@ exports.searchTest = async (req, res) => {
             });
         } else {
             res.json({ status: false, message: "test not found" })
-
         }
     } catch (error) {
         res.json({ status: false, message: error.message })
@@ -44,14 +43,19 @@ exports.searchTest = async (req, res) => {
 
 exports.viewTest = async (req, res) => {
     try {
+        const testresult = await TestResult.countDocuments({ test: req.body.id, student: req.user })
         const question = await Question.find({ test: req.body.id })
-        if (question) {
-            console.log(question)
-            res.json({ status: true, message: "test found", question })
-
-        } else {
-            res.json({ status: false, message: "no questions available" })
-
+        console.log(testresult)
+        if (testresult>0) {
+            res.json({ status: false, message: "test already attempted" })
+        }
+        else {
+            if (question) {
+                console.log(question)
+                res.json({ status: true, message: "test found", question })
+            } else {
+                res.json({ status: false, message: "no questions available" })
+            }
         }
     } catch (error) {
         res.json({ status: false, message: error.message })
@@ -60,41 +64,42 @@ exports.viewTest = async (req, res) => {
 
 exports.addResult = async (req, res) => {
     try {
-        // const teacher = await Teacher.findOne({ _id: req.user })
         const test = await Test.findOne({ _id: req.body.testId })
-        optionLength=req.body.option.split("~")
+        const question = await Question.countDocuments({ test: test._id })
+        const testresult=await TestResult.findOne({teacher:test.teacher, student: req.user})
+        optionLength = req.body.option.split("~").length
         console.log(optionLength)
-        // console.log(test)
-        // if (test) {
-        //     await TestResult.create({
-        //         teacher: test.teacher,
-        //         test: test._id,
-        //         attemptedQuestions: [{
-        //             question: req.body.question,
-        //             selectedOption: req.body.option,
-        //             isCorrect:req.bosy.option.split("~")
-
-        //         }]
-
-        //     })
-        // }
-        // console.log(test)
-        // if (test) {
-        //     const question = await Question.create({
-        //         test: test._id,
-        //         question: req.body.question,
-        //         options: req.body.options.map(option => ({
-        //             text: option.text,
-        //             isCorrect: option.isCorrect
-        //         }))
-        //     })
-        //     res.json({
-        //         message: "Test Created",
-        //         status: true,
-        //     });
-        // } else {
-        //     res.json({ status: false, message: "invalid test" })
-        // }
+        if(testresult){
+            testresult.attemptedQuestions.push({
+                question: req.body.question,
+                selectedOption: req.body.option.split("~")[0],
+                isCorrect: req.body.option.split("~")[optionLength - 1]
+              });
+              await testresult.save();
+              res.json({
+                message: "Test Created",
+                status: true,
+            });
+        }else{
+            if (test) {
+                await TestResult.create({
+                    teacher: test.teacher,
+                    test: test._id,
+                    student: req.user,
+                    totalQuestions: question,
+                    attemptedQuestions:[{
+                        question: req.body.question,
+                        selectedOption: req.body.option.split("~")[0],
+                        isCorrect: req.body.option.split("~")[optionLength - 1]
+                    }]
+                })
+                res.json({
+                    message: "Test Created",
+                    status: true,
+                });
+            }
+        }
+     
     } catch (error) {
         res.json({ status: false, message: error.message })
     }
