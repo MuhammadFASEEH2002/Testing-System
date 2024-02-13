@@ -18,6 +18,8 @@ router.post('/start-test', verifyToken , teacherController.startTest)
 router.post('/stop-test', verifyToken , teacherController.stopTest)
 router.post('/view-test', verifyToken , teacherController.viewTest)
 router.post('/delete-question', verifyToken , teacherController.deleteQuestion)
+router.post('/teacher-result-card', verifyToken , teacherController.resultCard)
+
 
 
 

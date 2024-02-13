@@ -3,7 +3,7 @@ import TeacherSidebar from '../../components/TeacherSidebar'
 import { useEffect, useState } from 'react';
 import { Text, useToast, Stack, HStack, Heading, Card, CardBody, Divider, CardFooter, Button, ButtonGroup, Spinner } from '@chakra-ui/react';
 import api from '../../utils/api';
-import { useNavigate} from 'react-router';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
 export default function TeacherMyTests() {
@@ -20,7 +20,7 @@ export default function TeacherMyTests() {
     const [cookies] = useCookies();
     const [tests, setTests] = useState<Test[]>([]);
     const [loading, setLoading] = useState(false);
-    
+
     const toast = useToast();
     const navigate = useNavigate();
     const teacherToken = cookies.teacherToken
@@ -55,11 +55,11 @@ export default function TeacherMyTests() {
             })
             navigate('/')
 
-        }   
+        }
     }
-    async function startTest(id:any) {
+    async function startTest(id: any) {
         try {
-            const response = await api.post('/api/start-test', { teacherToken , id})
+            const response = await api.post('/api/start-test', { teacherToken, id })
             if (response.data.status) {
                 toast({
                     title: "Test Started",
@@ -78,7 +78,7 @@ export default function TeacherMyTests() {
                     duration: 5000,
                     isClosable: true
                 })
-              
+
             }
         } catch (error) {
             toast({
@@ -90,11 +90,11 @@ export default function TeacherMyTests() {
             })
             navigate('/')
 
-        }   
+        }
     }
-    async function stopTest(id:any) {
+    async function stopTest(id: any) {
         try {
-            const response = await api.post('/api/stop-test', { teacherToken , id})
+            const response = await api.post('/api/stop-test', { teacherToken, id })
             if (response.data.status) {
                 toast({
                     title: "Test Stopped",
@@ -114,7 +114,7 @@ export default function TeacherMyTests() {
                     duration: 5000,
                     isClosable: true
                 })
-              
+
             }
         } catch (error) {
             toast({
@@ -126,11 +126,8 @@ export default function TeacherMyTests() {
             })
             navigate('/')
 
-        }   
+        }
     }
-
-
-
     return (
         <>
 
@@ -141,44 +138,48 @@ export default function TeacherMyTests() {
                     <HStack alignItems={"center"} justifyContent={"center"} flexWrap={"wrap"} spacing='2'>
                         {tests.map(tests => (
 
-                            <Card maxW='sm'>
+                            <Card width='sm' height="sm">
                                 <Button variant='solid' colorScheme='pink'>
                                     Delete
                                 </Button>
-                                <CardBody textAlign={"center"}> 
-                                {tests?.isActive?(<>
-                                    <Button bgColor={"red.400"} onClick={()=>{stopTest(tests._id)}}>Stop</Button>
+                                <CardBody textAlign={"center"}>
+                                    {tests?.isActive ? (<>
+                                        <Button bgColor={"red.400"} onClick={() => { stopTest(tests._id) }}>Stop</Button>
 
-                                </>):(<>
-
-<Button bgColor={"blue.400"} onClick={()=>{startTest(tests._id)}}>Start</Button>
-                                </>)}
-                                    <Stack mt='6' spacing='3'>
+                                    </>) : (<>
+                                        <Button bgColor={"blue.400"} onClick={() => { startTest(tests._id) }}>Start</Button>
+                                    </>)}
+                                    <Stack mt='6' spacing='3' alignItems={"center"} justifyContent={"center"}>
                                         <Heading size='md' fontSize='2xl'>{tests.testName}</Heading>
                                         <Text color='blue.600' >
                                             Test ID: {tests.testId}
                                         </Text>
+                                        <Button width={"40%"}>
+                                            <Link to={`/login/teacher/view-test-result/${tests._id}`}>
+                                                View Results
+                                            </Link>
+                                        </Button>
                                     </Stack>
                                 </CardBody>
                                 <Divider />
-                                <CardFooter>
-                                    <ButtonGroup spacing='2'>
-                                        {tests?.isActive?(<>
+                                <CardFooter width={"100%"} display={"flex"} alignItems={"center"} justifyContent={"center"}>
+                                    <ButtonGroup spacing='2' >
+                                        {tests?.isActive ? (<>
 
-                                        </>):(
+                                        </>) : (
                                             <>
 
-                                        <Button variant='ghost' colorScheme='blue'>
-                                            <Link to={`/login/teacher/view-test/${tests._id}`}>
-                                            View Test
-                                            </Link>
-                                        </Button>
+                                                <Button variant='ghost' colorScheme='blue'>
+                                                    <Link to={`/login/teacher/view-test/${tests._id}`}>
+                                                        View Test
+                                                    </Link>
+                                                </Button>
 
-                                        <Button variant='solid' colorScheme='blue'>
-                                            <Link to={`/login/teacher/add-question/${tests._id}`}>
-                                            Add Question
-                                            </Link>
-                                        </Button>
+                                                <Button variant='solid' colorScheme='blue'>
+                                                    <Link to={`/login/teacher/add-question/${tests._id}`}>
+                                                        Add Question
+                                                    </Link>
+                                                </Button>
                                             </>
                                         )}
                                     </ButtonGroup>

@@ -2,6 +2,8 @@ const Student = require("../models/Student.js");
 const Teacher = require("../models/Teacher.js");
 const Test = require("../models/Test.js");
 const Question = require("../models/Question.js")
+const TestResult = require("../models/TestResult.js")
+
 const bcrypt = require("bcrypt");
 
 exports.getTeacher = async (req, res) => {
@@ -43,6 +45,7 @@ exports.createTest = async (req, res) => {
                 teacher: teacher._id,
                 testId: req.body.testid,
                 testName: req.body.testname,
+                isActive: false
             })
             res.json({
                 message: "Test Created",
@@ -76,8 +79,8 @@ exports.getTests = async (req, res) => {
 }
 exports.startTest = async (req, res) => {
     try {
-        await Test.findByIdAndUpdate({ _id: req.body.id},{isActive:true})
-        res.json({ status: true, message: "test started"})
+        await Test.findByIdAndUpdate({ _id: req.body.id }, { isActive: true })
+        res.json({ status: true, message: "test started" })
     } catch (error) {
         res.json({ status: false, message: error.message })
 
@@ -85,8 +88,8 @@ exports.startTest = async (req, res) => {
 }
 exports.stopTest = async (req, res) => {
     try {
-        await Test.findByIdAndUpdate({ _id: req.body.id},{isActive:false})
-        res.json({ status: true, message: "test stopped"})
+        await Test.findByIdAndUpdate({ _id: req.body.id }, { isActive: false })
+        res.json({ status: true, message: "test stopped" })
     } catch (error) {
         res.json({ status: false, message: error.message })
     }
@@ -136,5 +139,14 @@ exports.deleteQuestion = async (req, res) => {
 
     } catch (error) {
         res.json({ status: false, message: error.message })
+    }
+}
+exports.resultCard = async (req, res) => {
+    try {
+        const testresult=await TestResult.find({test:req.body.id}).populate("student")
+        res.json({ status: true, message: "results found" , testresult})
+
+    } catch (error) {
+
     }
 }
