@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 
 export default function TeacherResults() {
+
     type TestResult = {
         _id: Object,
         teacher: Teacher,
@@ -36,6 +37,8 @@ export default function TeacherResults() {
         testName: string
     }
     const [testResult, setTestResult] = useState<TestResult[]>([]);
+    const [marks, setMarks] = useState([]);
+
     const { id } = useParams<{ id: string }>();
     const [cookies] = useCookies();
     const toast = useToast()
@@ -45,6 +48,8 @@ export default function TeacherResults() {
             const response = await api.post('/api/teacher-result-card', { teacherToken, id });
             if (response.data.status) {
                 setTestResult(response.data.testresult)
+                setMarks(response.data.obtainedMarks)
+                
             } else {
                 toast({
                     title: "Auth Error",
@@ -71,13 +76,27 @@ export default function TeacherResults() {
                     {
                         testResult.map(result => (
                             <>
+                            
                                 <Card width='30%' height="xs">
                                     <CardBody textAlign={"center"}>
                                         <Stack mt='6' spacing='3' alignItems={"center"} justifyContent={"center"}>
                                             <Heading size='md' fontSize='1xl'>Student Name: {result.student.firstName} {result.student.lastName}</Heading>
+                                            {/* {
+                                             
+                                                result.attemptedQuestions.forEach((ans) => {
+                                                    if (ans.isCorrect) {
+                                                    
+                                                    }
+                                                  });
+                                            
+                                            } */}
+                                            {marks.map(mark=>(
+
                                             <Text color='blue.600' >
-                                                Marks Obtained: {}/{result.totalQuestions}
+
+                                                Marks Obtained: {mark}/{result.totalQuestions}
                                             </Text>
+                                            ))}
                                         </Stack>
                                     </CardBody>
                                     <Divider />

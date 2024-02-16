@@ -19,6 +19,7 @@ type Test = {
 }
 
 export default function TeacherQuestion({ question }: { question: Question }) {
+
     const [correct, setCorrect] = useState();
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [cookies] = useCookies();

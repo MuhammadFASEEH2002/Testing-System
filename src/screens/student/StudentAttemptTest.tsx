@@ -82,7 +82,7 @@ export default function StudentAttemptTest() {
         }
     }
     useEffect(() => {
-        
+
     }, []);
     return (
         <>
@@ -107,8 +107,6 @@ export default function StudentAttemptTest() {
                                 <Divider />
                                 <CardFooter alignItems={"center"} justifyContent={"center"}>
                                     <ButtonGroup >
-
-
                                         {test?.isActive ? (<>
                                             <Button variant='solid' colorScheme='blue'>
                                                 <Link to={`/login/student/attempt-test-view/${test?._id}`}>

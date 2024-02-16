@@ -143,9 +143,25 @@ exports.deleteQuestion = async (req, res) => {
 }
 exports.resultCard = async (req, res) => {
     try {
-        const testresult=await TestResult.find({test:req.body.id}).populate("student")
-        res.json({ status: true, message: "results found" , testresult})
+       
+        let obtainedMarks=[];
+        const testresult = await TestResult.find({ test: req.body.id }).populate("student")
 
+
+        testresult.map((result) => {
+            let counter = 0;
+            result.attemptedQuestions.forEach((marks) => {
+                if (marks.isCorrect) {
+                    counter += 1;
+                }
+                // Add handling for incorrect answers if needed
+            });
+            
+            obtainedMarks.push(counter);
+        });
+        // console.log(obtainedMarks)
+        console.log(obtainedMarks)
+        res.json({ status: true, message: "results found", testresult, obtainedMarks })
     } catch (error) {
 
     }
