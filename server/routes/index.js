@@ -19,6 +19,8 @@ router.post('/stop-test', verifyToken , teacherController.stopTest)
 router.post('/view-test', verifyToken , teacherController.viewTest)
 router.post('/delete-question', verifyToken , teacherController.deleteQuestion)
 router.post('/teacher-result-card', verifyToken , teacherController.resultCard)
+router.post('/teacher-result-delete', verifyToken , teacherController.deleteResult)
+
 
 
 

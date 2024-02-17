@@ -90,7 +90,7 @@ exports.addResult = async (req, res) => {
                     attemptedQuestions:[{
                         question: req.body.question,
                         selectedOption: req.body.option.split("~")[0],
-                        isCorrect: req.body.option.split("~")[optionLength - 1]
+                        isCorrect: req.body.option.split("~")[optionLength - 1],
                     }]
                 })
                 res.json({

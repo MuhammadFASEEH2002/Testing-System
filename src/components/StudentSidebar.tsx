@@ -14,12 +14,13 @@ import {
 } from '@chakra-ui/react'
 import {
   FiHome,
-  FiSettings,
   FiMenu,
 } from 'react-icons/fi'
 import { LuPencilLine } from "react-icons/lu";
 import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
+import { CiLogout } from "react-icons/ci";
+
 interface LinkItemProps {
   name: string
   icon: IconType,
@@ -44,12 +45,13 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Attempt Test', icon: LuPencilLine, link:"/login/student/attempt-test"},
   // { name: 'Total Test', icon: FiCompass },
   // { name: 'Results', icon: FiStar },
-  { name: 'Logout', icon: FiSettings, link: "/login/student/logout" },
+  { name: 'Logout', icon: CiLogout, link: "/login/student/logout" },
 ]
 import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { SiTestcafe } from "react-icons/si";
+
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (

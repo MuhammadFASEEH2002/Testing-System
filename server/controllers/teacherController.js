@@ -135,34 +135,38 @@ exports.deleteQuestion = async (req, res) => {
     try {
         await Question.findByIdAndDelete({ _id: req.body.id })
         res.json({ status: true, message: "Question Deleted" })
-
-
     } catch (error) {
         res.json({ status: false, message: error.message })
     }
 }
 exports.resultCard = async (req, res) => {
     try {
-       
-        let obtainedMarks=[];
+
+        let obtainedMarks = [];
         const testresult = await TestResult.find({ test: req.body.id }).populate("student")
-
-
-        testresult.map((result) => {
-            let counter = 0;
-            result.attemptedQuestions.forEach((marks) => {
-                if (marks.isCorrect) {
-                    counter += 1;
-                }
-                // Add handling for incorrect answers if needed
+        if (testresult) {
+            testresult.map((result) => {
+                let counter = 0;
+                result.attemptedQuestions.forEach((marks) => {
+                    if (marks.isCorrect) {
+                        counter += 1;
+                    }
+                });
+                obtainedMarks.push(counter);
             });
-            
-            obtainedMarks.push(counter);
-        });
-        // console.log(obtainedMarks)
-        console.log(obtainedMarks)
-        res.json({ status: true, message: "results found", testresult, obtainedMarks })
+            res.json({ status: true, message: "results found", testresult, obtainedMarks })
+        }
     } catch (error) {
+        res.json({ status: false, message: error.message })
 
+    }
+}
+exports.deleteResult = async (req, res) => {
+    try {
+        await TestResult.findByIdAndDelete({ _id: req.body.resultid })
+        res.json({ status: true, message: "Response Deleted" })
+    } catch (error) {
+        res.json({ status: false, message: error.message })
+ 
     }
 }

@@ -27,6 +27,8 @@ const TestResultSchema = new mongoose.Schema({
             isCorrect: Boolean
         }
     ]
+    , 
+    marks:{type:String}
 });
 
 const TestResult = mongoose.model("testresult", TestResultSchema);

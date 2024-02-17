@@ -130,7 +130,6 @@ export default function TeacherMyTests() {
     }
     return (
         <>
-
             <TeacherSidebar>
                 {loading ? (
                     <><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack> </>
@@ -156,7 +155,7 @@ export default function TeacherMyTests() {
                                         </Text>
                                         <Button width={"40%"}>
                                             <Link to={`/login/teacher/view-test-result/${tests._id}`}>
-                                                View Results
+                                                Results
                                             </Link>
                                         </Button>
                                     </Stack>

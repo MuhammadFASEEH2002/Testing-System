@@ -14,16 +14,14 @@ import {
 } from '@chakra-ui/react'
 import {
   FiHome,
-  // FiTrendingUp,
-  // FiCompass,
-  // FiStar,
   FiSettings,
   FiMenu,
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
 import { MdCreate } from "react-icons/md";
-import { CiBoxList } from "react-icons/ci";
+import { CiBoxList, CiLogout } from "react-icons/ci";
+
 interface LinkItemProps {
   name: string
   icon: IconType
@@ -48,7 +46,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Create Test', icon:  MdCreate ,link:"/login/teacher/create-test" },
   { name: 'My Tests', icon: CiBoxList ,link:"/login/teacher/my-tests" },
   // { name: 'Results', icon: FiStar },
-  { name: 'Logout', icon: FiSettings , link:"/login/teacher/logout"},
+  { name: 'Logout', icon: CiLogout , link:"/login/teacher/logout"},
 ]
 import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router'
