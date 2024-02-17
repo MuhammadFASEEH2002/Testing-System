@@ -43,8 +43,6 @@ interface SidebarProps extends BoxProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, link: "/login/student/home" },
   { name: 'Attempt Test', icon: LuPencilLine, link:"/login/student/attempt-test"},
-  // { name: 'Total Test', icon: FiCompass },
-  // { name: 'Results', icon: FiStar },
   { name: 'Logout', icon: CiLogout, link: "/login/student/logout" },
 ]
 import { ReactNode, useEffect } from 'react';

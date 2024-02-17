@@ -14,8 +14,7 @@ import {
 } from '@chakra-ui/react'
 import {
   FiHome,
-  FiSettings,
-  FiMenu,
+  FiMenu
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import { useCookies } from 'react-cookie'
@@ -45,7 +44,6 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, link: "/login/teacher/home" },
   { name: 'Create Test', icon:  MdCreate ,link:"/login/teacher/create-test" },
   { name: 'My Tests', icon: CiBoxList ,link:"/login/teacher/my-tests" },
-  // { name: 'Results', icon: FiStar },
   { name: 'Logout', icon: CiLogout , link:"/login/teacher/logout"},
 ]
 import { ReactNode, useEffect } from 'react';
