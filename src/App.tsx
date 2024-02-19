@@ -29,7 +29,6 @@ function App() {
           <Route path="/login/teacher/add-question/:id" element={<TeacherAddQuestion/>} />
           <Route path="/login/teacher/view-test/:id" element={<TeacherViewTest/>} />
           <Route path="/login/teacher/view-test-result/:id" element={<TeacherResults/>} />
-
           <Route path="/login/teacher/logout" element={<TeacherLogout/>} />
           <Route path="/login/student/home" element={<StudentHome />}/>
           <Route path="/login/student/attempt-test" element={<StudentAttemptTest/>}/>
@@ -40,6 +39,5 @@ function App() {
     </>
   );
 }
-// }
 
 export default App;

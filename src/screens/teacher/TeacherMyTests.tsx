@@ -27,6 +27,44 @@ export default function TeacherMyTests() {
     useEffect(() => {
         getTest();
     }, []);
+    async function deleteTest(testid: any) {
+        try {
+            setLoading(true);
+            const response = await api.post('/api/delete-test', { teacherToken, testid })
+            if (response.data.status) {
+                toast({
+                    title: "Test Deleted",
+                    status: "success",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true
+                })
+                getTest()
+
+            } else {
+                toast({
+                    title: "Error",
+                    description: response.data.message,
+                    status: "error",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true
+                })
+                navigate('/login/teacher/home')
+            }
+        } catch (error) {
+            toast({
+                title: "Network Error",
+                status: "error",
+                position: "top",
+                duration: 5000,
+                isClosable: true
+            })
+            navigate('/')
+
+        }
+    }
+
     async function getTest() {
         try {
             setLoading(true);
@@ -138,7 +176,7 @@ export default function TeacherMyTests() {
                         {tests.map(tests => (
 
                             <Card width='sm' height="sm">
-                                <Button variant='solid' colorScheme='pink'>
+                                <Button variant='solid' colorScheme='pink' onClick={() => { deleteTest(tests._id) }}>
                                     Delete
                                 </Button>
                                 <CardBody textAlign={"center"}>

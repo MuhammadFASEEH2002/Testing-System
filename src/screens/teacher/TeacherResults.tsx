@@ -120,7 +120,8 @@ export default function TeacherResults() {
             <TeacherSidebar>
                 {loading ? (<><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Spinner size='xl' /></Stack></>) : (<>
                     {/* @ts-ignore */}
-                    <HStack alignItems={"center"} justifyContent={"center"} flexWrap={"wrap"} spacing='2'>
+                    {testResult.length>0 ? (<>
+                        <HStack alignItems={"center"} justifyContent={"center"} flexWrap={"wrap"} spacing='2'>
                         {
                             testResult.map((result, index) => (
                                 <>
@@ -142,6 +143,8 @@ export default function TeacherResults() {
                             ))
                         }
                     </HStack>
+                    </>):(<><Stack minHeight={'100%'} width={'100%'} alignItems={"center"} justifyContent={"center"} ><Text>no results</Text></Stack></>)}
+                   
                 </>)}
 
             </TeacherSidebar>

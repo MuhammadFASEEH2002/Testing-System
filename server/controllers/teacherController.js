@@ -3,7 +3,6 @@ const Teacher = require("../models/Teacher.js");
 const Test = require("../models/Test.js");
 const Question = require("../models/Question.js")
 const TestResult = require("../models/TestResult.js")
-
 const bcrypt = require("bcrypt");
 
 exports.getTeacher = async (req, res) => {
@@ -18,9 +17,9 @@ exports.getTeacher = async (req, res) => {
         }
     } catch (error) {
         res.json({ status: false, message: error.message })
-
     }
 }
+
 exports.createTest = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ _id: req.user })
@@ -55,9 +54,9 @@ exports.createTest = async (req, res) => {
         }
     } catch (error) {
         res.json({ status: false, message: error.message })
-
     }
 }
+
 exports.getTests = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ _id: req.user })
@@ -69,7 +68,6 @@ exports.getTests = async (req, res) => {
                 res.json({ status: true, message: "test found", test })
             } else {
                 res.json({ status: false, message: "no test available" })
-
             }
         }
     } catch (error) {
@@ -77,15 +75,16 @@ exports.getTests = async (req, res) => {
 
     }
 }
+
 exports.startTest = async (req, res) => {
     try {
         await Test.findByIdAndUpdate({ _id: req.body.id }, { isActive: true })
         res.json({ status: true, message: "test started" })
     } catch (error) {
         res.json({ status: false, message: error.message })
-
     }
 }
+
 exports.stopTest = async (req, res) => {
     try {
         await Test.findByIdAndUpdate({ _id: req.body.id }, { isActive: false })
@@ -94,6 +93,7 @@ exports.stopTest = async (req, res) => {
         res.json({ status: false, message: error.message })
     }
 }
+
 exports.addQuestion = async (req, res) => {
     try {
         const test = await Test.findOne({ _id: req.body.id })
@@ -131,6 +131,7 @@ exports.viewTest = async (req, res) => {
         res.json({ status: false, message: error.message })
     }
 }
+
 exports.deleteQuestion = async (req, res) => {
     try {
         await Question.findByIdAndDelete({ _id: req.body.id })
@@ -139,9 +140,9 @@ exports.deleteQuestion = async (req, res) => {
         res.json({ status: false, message: error.message })
     }
 }
+
 exports.resultCard = async (req, res) => {
     try {
-
         let obtainedMarks = [];
         const testresult = await TestResult.find({ test: req.body.id }).populate("student")
         if (testresult) {
@@ -158,15 +159,22 @@ exports.resultCard = async (req, res) => {
         }
     } catch (error) {
         res.json({ status: false, message: error.message })
-
     }
 }
+
 exports.deleteResult = async (req, res) => {
     try {
         await TestResult.findByIdAndDelete({ _id: req.body.resultid })
         res.json({ status: true, message: "Response Deleted" })
     } catch (error) {
         res.json({ status: false, message: error.message })
- 
+    }
+}
+
+exports.deleteTest = async (req, res) => {
+    try {
+        res.json({ status: true, message: "Response Deleted" })
+    } catch (error) {
+        res.json({ status: false, message: error.message })
     }
 }

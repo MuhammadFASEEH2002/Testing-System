@@ -26,8 +26,7 @@ const TestResultSchema = new mongoose.Schema({
             selectedOption: String,
             isCorrect: Boolean
         }
-    ]
-    , 
+    ], 
     marks:{type:String}
 });
 
